@@ -5,7 +5,7 @@ This API queries the Rainbow Six Siege stats from any given player by name or up
 1. Clone this whole repo
 2. Upload it to your webserver to any location
 3. In the getUser.php change the **INSERT EMAIL** and the **INSERT PASSWORD** fields to a uplay account of your choice.
-4. For your security you will need to also set a appcode. It's also located in the getUser.php and is a string of your choice (You just have to remember it ;)) WARNING: Obviously you should not use spaces).
+4. For your security you will need to set an appcode. It's also located in the getUser.php and can be changed to a string of your choice (You just have to remember it ;)) WARNING: Obviously you should not use spaces).
 5. Finished!
 
 ## Usage:
