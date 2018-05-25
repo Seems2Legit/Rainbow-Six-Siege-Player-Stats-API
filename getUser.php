@@ -9,7 +9,7 @@ if(!isset($_GET["appcode"])) {
 	die();
 }
 
-if($_GET["appcode"] != "test") {
+if($_GET["appcode"] != "**INSERT APPCODE**") {
 	print "ERROR: Wrong appcode";
 	die();
 }
@@ -21,7 +21,7 @@ if(!isset($_GET["id"]) && !isset($_GET["name"])) {
 
 include("uAPI.php");
 
-$uapi = new ubiapi("ddsdsdasfwesfced@trash-mail.com","yollo12345",null);
+$uapi = new ubiapi("**INSERT EMAIL**","**INSERT PASSWORD**",null);
 $rt = $uapi->refreshTicket("bynick","AE_SeemsLegit");
 
 if($rt["error"]){
@@ -85,11 +85,11 @@ foreach ($data as $value) {
 }
 $ids = substr($ids, 1);
 
-$test = json_decode($uapi->getStats($ids), true);
-$test2 = array();
-foreach($test["players"] as $value) {
+$idresponse = json_decode($uapi->getStats($ids), true);
+$final = array();
+foreach($idresponse["players"] as $value) {
 	$id = $value["profile_id"];
-	$test2[$id] = array_merge($value, array("nickname"=>$data[$id]["nickname"]));
+	$final[$id] = array_merge($value, array("nickname"=>$data[$id]["nickname"]));
 }
-print json_encode(array("players" => $test2));
+print json_encode(array("players" => $final));
 ?>
