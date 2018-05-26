@@ -33,10 +33,14 @@ if($rt["error"]){
 }
 
 $data = array();
+$region = "emea"; //EUROPEAN
 $season = -1;
 
 if(isset($_GET['season'])) {
 	$season = $_GET['season'];	
+}
+if(isset($_GET['region'])) {
+	$region = $_GET['region'];	
 }
 
 function printName($uid) {
@@ -90,7 +94,7 @@ foreach ($data as $value) {
 }
 $ids = substr($ids, 1);
 
-$idresponse = json_decode($uapi->getStats($ids, $season), true);
+$idresponse = json_decode($uapi->getStats($ids, $season, $region), true);
 $final = array();
 foreach($idresponse["players"] as $value) {
 	$id = $value["profile_id"];
