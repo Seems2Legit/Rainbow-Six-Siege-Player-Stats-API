@@ -11,7 +11,8 @@ This API queries the Rainbow Six Siege stats from any given player by name or up
 7. Finished!
 
 ## Usage:
-With this API you can query multiple users at one and it does not matter if you use their names, uplayID's or both. (Get requests)
+### getUser.php:
+With this API you can query multiple users at one and it does not matter if you use their names, uplayID's or both. (Get requests).
 
 Here are some examples:
 ```
@@ -24,6 +25,7 @@ As you can see it does not matter if you give the api a name or uplay id. It's j
 ### Optional Arguments:
 ```
 &season=SEASON (Default -1)
+&region_id=REGION (Default emea)
 ```
 
 Here are the example responses from the GET requests mentioned above:
@@ -136,6 +138,47 @@ Here are the example responses from the GET requests mentioned above:
 }
 
 ```
+### getSmallUser.php:
+This function only returns the uplayID and the uplay name of any given person(s) (by uid or name). As argument you may only pass appcode.
+
+Examples:
+```
+https://gassner.online/api/r6/getSmallUser.php?name=AE_SeemsLegit,AE_BadKey&appcode=test
+https://gassner.online/api/r6/getSmallUser.php?name=AE_SeemsLegit&appcode=test
+https://gassner.online/api/r6/getSmallUser.php?id=735e4640-32d3-484f-ba56-f80030d35337&appcode=test
+```
+Resonses:
+```
+[
+  {
+    "profile_id": "a39c7ad5-3282-467c-bc85-f65b0e61cde4",
+    "nickname": "AE_SeemsLegit"
+  },
+  {
+    "profile_id": "735e4640-32d3-484f-ba56-f80030d35337",
+    "nickname": "AE_BadKey"
+  }
+]
+
+-----------------------------------------------------------------------------------------
+
+[
+  {
+    "profile_id": "735e4640-32d3-484f-ba56-f80030d35337",
+    "nickname": "AE_BadKey"
+  }
+]
+
+-----------------------------------------------------------------------------------------
+
+[
+  {
+    "profile_id": "735e4640-32d3-484f-ba56-f80030d35337",
+    "nickname": "AE_BadKey"
+  }
+]
+```
+
 ## Todo:
 - Add config.php
 
