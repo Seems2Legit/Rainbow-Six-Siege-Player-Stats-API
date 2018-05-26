@@ -167,9 +167,9 @@ class ubiapi{
 	    /**
      * @return array raw-raw answer from ubi, json-array formated json
      */
-	public function getStats($users, $season){
+	public function getStats($users, $season, $region){
 		$user = explode(",",$users)[0];
-		$request_url = "https://public-ubiservices.ubi.com/v1/spaces/5172a557-50b5-4665-b7db-e3f2e8c5041d/sandboxes/OSBOR_PC_LNCH_A/r6karma/players?board_id=pvp_ranked&profile_ids=$users&region_id=emea&season_id=$season";
+		$request_url = "https://public-ubiservices.ubi.com/v1/spaces/5172a557-50b5-4665-b7db-e3f2e8c5041d/sandboxes/OSBOR_PC_LNCH_A/r6karma/players?board_id=pvp_ranked&profile_ids=$users&region_id=$region&season_id=$season";
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $request_url);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
