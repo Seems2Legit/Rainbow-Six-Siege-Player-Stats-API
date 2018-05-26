@@ -6,8 +6,9 @@ This API queries the Rainbow Six Siege stats from any given player by name or up
 2. Upload it to your webserver to any location
 3. In the getUser.php change the **INSERT EMAIL** and the **INSERT PASSWORD** fields to a uplay account of your choice.
 4. For your security you will need to set an appcode. It's also located in the getUser.php and can be changed to a string of your choice (You just have to remember it ;)) WARNING: Obviously you should not use spaces).
-5. Give the webserver permissions to edit the API_TICKET file.
-6. Finished!
+5. The same steps apply for the getSmallUser.php (config.php is in progress)
+6. Give the webserver permissions to edit the API_TICKET file.
+7. Finished!
 
 ## Usage:
 With this API you can query multiple users at one and it does not matter if you use their names, uplayID's or both. (Get requests)
@@ -19,6 +20,11 @@ https://gassner.online/api/r6/getUser.php?name=AE_SeemsLegit&appcode=test
 https://gassner.online/api/r6/getUser.php?id=735e4640-32d3-484f-ba56-f80030d35337&name=AE_SeemsLegit&appcode=test
 ```
 As you can see it does not matter if you give the api a name or uplay id. It's just important that you never forget to put the appcode into you request.
+
+### Optional Arguments:
+```
+&season=SEASON (Default -1)
+```
 
 Here are the example responses from the GET requests mentioned above:
 ```
@@ -130,6 +136,8 @@ Here are the example responses from the GET requests mentioned above:
 }
 
 ```
+## Todo:
+- Add config.php
 
 Thanks to Seems2Legit and special thanks to K4CZP3R. They made this whole project even possible.
 
