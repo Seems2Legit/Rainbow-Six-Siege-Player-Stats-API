@@ -147,7 +147,7 @@ https://gassner.online/api/r6/getSmallUser.php?name=AE_SeemsLegit,AE_BadKey&appc
 https://gassner.online/api/r6/getSmallUser.php?name=AE_SeemsLegit&appcode=test
 https://gassner.online/api/r6/getSmallUser.php?id=735e4640-32d3-484f-ba56-f80030d35337&appcode=test
 ```
-Resonses:
+Responses:
 ```
 [
   {
