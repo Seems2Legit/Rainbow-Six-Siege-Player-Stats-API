@@ -4,7 +4,7 @@
  * @copyright 2017
  * @version 2.0.1.2
  * github.com/K4CZP3R
- * Updated at 01-Mar-2017
+ * Updated at 27-May-2017 by Seems2Legit (getStats,login,searchUser)
  */
 class ubiapi{
 	private $b64authcreds;
