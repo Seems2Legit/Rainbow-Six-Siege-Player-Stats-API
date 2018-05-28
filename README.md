@@ -187,6 +187,11 @@ Examples:
 https://gassner.online/api/r6/getStats.php?id=a39c7ad5-3282-467c-bc85-f65b0e61cde4&appcode=test
 ```
 
+### Optional Arguments:
+```
+&stats=STATS (e.g. casualpvp_death,casualpvp_kills)
+```
+
 Responses:
 ```
 {
