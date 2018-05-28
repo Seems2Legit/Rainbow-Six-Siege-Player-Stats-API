@@ -4,7 +4,7 @@
  * @copyright 2017
  * @version 2.0.1.2
  * github.com/K4CZP3R
- * Updated at 27-May-2018 by Seems2Legit (getStats,login,searchUser)
+ * Updated at 01-Mar-2017
  */
 class ubiapi{
 	private $b64authcreds;
@@ -164,10 +164,37 @@ class ubiapi{
 		return $head;
 	}
 	
+		    /**
+     * @return array raw-raw answer from ubi, json-array formated json
+     */
+	public function getStats($users, $stats){
+		$user = explode(",",$users)[0];
+		$request_url = "https://public-ubiservices.ubi.com/v1/spaces/5172a557-50b5-4665-b7db-e3f2e8c5041d/sandboxes/OSBOR_PC_LNCH_A/playerstats2/statistics?populations=$users&statistics=$stats";
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $request_url);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		$headers =[
+		"Authorization: ".$this->uplayticket(false),
+		"Origin: https://game-rainbow6.ubi.com",
+		"Accept-Encoding: gzip, deflate, br",
+		"Host: public-ubiservices.ubi.com",
+		"Accept-Language: de-DE,de;q=0.9,en-US;q=0.8,en;q=0.7",
+		"User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36 OPR/52.0.2871.99",
+		"Accept: application/json, text/plain, */*",
+		"Ubi-AppId: 39baebad-39e5-4552-8c25-2c9b919064e2",
+		"Ubi-SessionId: a4df2e5c-7fee-41ff-afe5-9d79e68e8048",
+		"Referer: https://game-rainbow6.ubi.com/de-de/uplay/player-statistics/$user/multiplayer",
+		"Connection: keep-alive"];
+		curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+		$ubioutput = curl_exec($ch);
+		curl_close($ch);
+		return $ubioutput;
+	}
+	
 	    /**
      * @return array raw-raw answer from ubi, json-array formated json
      */
-	public function getStats($users, $season, $region){
+	public function getRanking($users, $season, $region){
 		$user = explode(",",$users)[0];
 		$request_url = "https://public-ubiservices.ubi.com/v1/spaces/5172a557-50b5-4665-b7db-e3f2e8c5041d/sandboxes/OSBOR_PC_LNCH_A/r6karma/players?board_id=pvp_ranked&profile_ids=$users&region_id=$region&season_id=$season";
 		$ch = curl_init();

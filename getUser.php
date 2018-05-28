@@ -1,4 +1,6 @@
 <?php
+include("config.php");
+
 if(empty($_GET)) {
 	print "ERROR: Wrong usage";
 	die();
@@ -9,7 +11,7 @@ if(!isset($_GET["appcode"])) {
 	die();
 }
 
-if($_GET["appcode"] != "**INSERT APPCODE**") {
+if($_GET["appcode"] != $config["appcode"]) {
 	print "ERROR: Wrong appcode";
 	die();
 }
@@ -19,9 +21,11 @@ if(!isset($_GET["id"]) && !isset($_GET["name"])) {
 	die();
 }
 
+
+
 include("uAPI.php");
 
-$uapi = new ubiapi("**INSERT EMAIL**","**INSERT PASSWORD**",null);
+$uapi = new ubiapi($config["ubi-email"],$config["ubi-password"],null);
 $rt = $uapi->refreshTicket("bynick","AE_SeemsLegit");
 
 if($rt["error"]){
@@ -33,7 +37,7 @@ if($rt["error"]){
 }
 
 $data = array();
-$region = "emea"; //EUROPEAN
+$region = $config["default-region"];
 $season = -1;
 
 if(isset($_GET['season'])) {
@@ -85,7 +89,7 @@ if(isset($_GET["name"])) {
 }
 
 if(empty($data)) {
-		die();
+		die(json_encode(array("players" => array())));
 }
 
 $ids = "";
@@ -94,7 +98,7 @@ foreach ($data as $value) {
 }
 $ids = substr($ids, 1);
 
-$idresponse = json_decode($uapi->getStats($ids, $season, $region), true);
+$idresponse = json_decode($uapi->getRanking($ids, $season, $region), true);
 $final = array();
 foreach($idresponse["players"] as $value) {
 	$id = $value["profile_id"];

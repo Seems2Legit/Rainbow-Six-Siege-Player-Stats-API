@@ -21,26 +21,37 @@ if(!isset($_GET["id"]) && !isset($_GET["name"])) {
 	die();
 }
 
+
+
 include("uAPI.php");
 
 $uapi = new ubiapi($config["ubi-email"],$config["ubi-password"],null);
-#$rt = $uapi->refreshTicket("bynick","AE_SeemsLegit");
+$rt = $uapi->refreshTicket("bynick","AE_SeemsLegit");
 
-#if($rt["error"]){
-#	$apianswer = $uapi->login(1);
-#	if($apianswer["error"]) {
-#		print "ERROR: Can't login";
-#		die();
-#	} 
-#}
+if($rt["error"]){
+	$apianswer = $uapi->login(1);
+	if($apianswer["error"]) {
+		print "ERROR: Can't login";
+		die();
+	} 
+}
 
 $data = array();
+$stats = $config["default-stats"];
+$season = -1;
+
+if(isset($_GET['season'])) {
+	$season = $_GET['season'];	
+}
+if(isset($_GET['stats'])) {
+	$stats = $_GET['stats'];	
+}
 
 function printName($uid) {
 	global $uapi, $data, $id;
 	$su = $uapi->searchUser("byid",$uid);
 	if($su["error"] != true){
-		$data[] = array("profile_id" =>$su['uid'], "nickname" => $su['nick']);
+		$data[$su['uid']] = array("profile_id" =>$su['uid'], "nickname" => $su['nick']);
 	}
 }
 
@@ -48,7 +59,7 @@ function printID($name) {
 	global $uapi, $data, $id;
 	$su = $uapi->searchUser("bynick",$name);
 	if($su["error"] != true){
-		$data[] = array("profile_id"=> $su['uid'] , "nickname" => $su['nick']);
+		$data[$su['uid']] = array("profile_id"=> $su['uid'] , "nickname" => $su['nick']);
 	}
 }
 
@@ -81,5 +92,17 @@ if(empty($data)) {
 		die(json_encode(array("players" => array())));
 }
 
-print json_encode($data);
+$ids = "";
+foreach ($data as $value) {
+	$ids = $ids . "," . $value["profile_id"];
+}
+$ids = substr($ids, 1);
+
+$idresponse = json_decode($uapi->getStats($ids, $stats), true);
+$final = array();
+foreach($idresponse["results"] as $value) {
+	$id = array_search ($value, $idresponse["results"]);
+	$final[$id] = array_merge($value, array("nickname"=>$data[$id]["nickname"]));
+}
+print str_replace(":infinite", "", json_encode(array("players" => $final)));
 ?>
