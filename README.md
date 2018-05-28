@@ -181,7 +181,9 @@ Responses:
 
 ## Todo:
 - Add config.php
+- Kills and deaths
+- Operator Stats
 
 Thanks to Seems2Legit and special thanks to K4CZP3R. They made this whole project even possible.
 
-Updated: 26.05.2018 01:03 UTC
+Updated: 28.05.2018 14:26 UTC
