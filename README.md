@@ -4,9 +4,9 @@ This API queries the Rainbow Six Siege stats from any given player by name or up
 ## Installation:
 1. Clone this whole repo
 2. Upload it to your webserver to any location
-3. In the getUser.php change the **INSERT EMAIL** and the **INSERT PASSWORD** fields to a uplay account of your choice.
-4. For your security you will need to set an appcode. It's also located in the getUser.php and can be changed to a string of your choice (You just have to remember it ;)) WARNING: Obviously you should not use spaces).
-5. The same steps apply for the getSmallUser.php (config.php is in progress)
+3. In the config.php change the **EMAIL** and the **PASSWORD** fields to an uplay account of your choice.
+4. For your security you will need to set an appcode. It's also located in the config.php and can be changed to a string of your choice (You just have to remember it ;)) WARNING: Obviously you should not use spaces).
+5. Optionally you can also set your default region and witch stats you want to display on a request
 6. Give the webserver permissions to edit the API_TICKET file.
 7. Finished!
 
@@ -25,7 +25,7 @@ As you can see it does not matter if you give the api a name or uplay id. It's j
 ### Optional Arguments:
 ```
 &season=SEASON (Default -1)
-&region_id=REGION (Default emea)
+&region=REGION (Default emea)
 ```
 
 Here are the example responses from the GET requests mentioned above:
@@ -179,11 +179,36 @@ Responses:
 ]
 ```
 
+### getStats.php:
+With this PHP file you can query the stats of any given player by name or uplay id. Whitch stats are returned is definded in the config.php. All stats that can be returned (+Operator stats): https://gist.github.com/LaxisB/3924cfdc35562b719d1c891cdb895366
+
+Examples:
+```
+https://gassner.online/api/r6/getStats.php?id=a39c7ad5-3282-467c-bc85-f65b0e61cde4&appcode=test
+```
+
+Responses:
+```
+{
+  "players": {
+    "a39c7ad5-3282-467c-bc85-f65b0e61cde4": {
+      "casualpvp_matchwon": 126,
+      "casualpvp_kills": 723,
+      "casualpvp_death": 773,
+      "casualpvp_matchlost": 130,
+      "casualpvp_matchplayed": 256,
+      "casualpvp_timeplayed": 204662,
+      "nickname": "AE_SeemsLegit"
+    }
+  }
+}
+```
+
 ## Todo:
-- Add config.php
-- Kills and deaths
-- Operator Stats
+- Add config.php - Done
+- Kills and deaths - Done
+- Operator Stats - Done
 
 Thanks to Seems2Legit and special thanks to K4CZP3R. They made this whole project even possible.
 
-Updated: 28.05.2018 14:26 UTC
+Updated: 28.05.2018 18:50 UTC
