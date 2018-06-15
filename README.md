@@ -165,7 +165,7 @@ Responses:
 [
   {
     "profile_id": "735e4640-32d3-484f-ba56-f80030d35337",
-    "nickname": "AE_BadKey"
+    "nickname": "AE_SeemsLegit"
   }
 ]
 
