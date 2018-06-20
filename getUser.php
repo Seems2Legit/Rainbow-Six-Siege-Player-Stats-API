@@ -21,8 +21,6 @@ if(!isset($_GET["id"]) && !isset($_GET["name"])) {
 	die();
 }
 
-
-
 include("uAPI.php");
 
 $uapi = new ubiapi($config["ubi-email"],$config["ubi-password"],null);
@@ -39,6 +37,7 @@ if($rt["error"]){
 $data = array();
 $region = $config["default-region"];
 $season = -1;
+$platform = $config["default-platform"];
 
 if(isset($_GET['season'])) {
 	$season = $_GET['season'];	
@@ -46,18 +45,21 @@ if(isset($_GET['season'])) {
 if(isset($_GET['region'])) {
 	$region = $_GET['region'];	
 }
+if(isset($_GET['platform'])) {
+	$platform = $_GET['platform'];	
+}
 
 function printName($uid) {
 	global $uapi, $data, $id;
-	$su = $uapi->searchUser("byid",$uid);
+	$su = $uapi->searchUser("byid", $uid);
 	if($su["error"] != true){
 		$data[$su['uid']] = array("profile_id" =>$su['uid'], "nickname" => $su['nick']);
 	}
 }
 
-function printID($name) {
+function printID($name, $platform) {
 	global $uapi, $data, $id;
-	$su = $uapi->searchUser("bynick",$name);
+	$su = $uapi->searchUser("bynick", $name, $platform);
 	if($su["error"] != true){
 		$data[$su['uid']] = array("profile_id"=> $su['uid'] , "nickname" => $su['nick']);
 	}
@@ -70,7 +72,7 @@ if(isset($_GET["id"])) {
 	}else{
 		$tocheck = array($str);
 	}
-	
+
 	foreach ($tocheck as $value) {
 		printName($value);
 	}
@@ -82,14 +84,14 @@ if(isset($_GET["name"])) {
 	}else{
 		$tocheck = array($str);
 	}
-	
+
 	foreach ($tocheck as $value) {
-		printID($value);
+		printID($value, $platform);
 	}
 }
 
 if(empty($data)) {
-		die(json_encode(array("players" => array())));
+	die(json_encode(array("players" => array())));
 }
 
 $ids = "";
@@ -98,7 +100,7 @@ foreach ($data as $value) {
 }
 $ids = substr($ids, 1);
 
-$idresponse = json_decode($uapi->getRanking($ids, $season, $region), true);
+$idresponse = json_decode($uapi->getRanking($ids, $season, $region, $platform), true);
 $final = array();
 foreach($idresponse["players"] as $value) {
 	$id = $value["profile_id"];
