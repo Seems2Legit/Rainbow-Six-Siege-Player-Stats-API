@@ -69,7 +69,7 @@ class UbiAPI{
   }
 
   public function getStats($users, $stats, $platform){
-    $array = array_chunk(explode(",",$stats),20,true);
+    $array = array_chunk(explode(",",$stats),19,true);
     $final = array();
 
     foreach($array as $row) {
