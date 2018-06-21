@@ -20,35 +20,33 @@ if(!isset($_GET["id"]) && !isset($_GET["name"])) {
 	print "ERROR: Wrong usage";
 	die();
 }
+include("UbiAPI.php");
 
-include("uAPI.php");
-
-$uapi = new ubiapi($config["ubi-email"],$config["ubi-password"],null);
-#$rt = $uapi->refreshTicket("bynick","AE_SeemsLegit");
-
-#if($rt["error"]){
-#	$apianswer = $uapi->login(1);
-#	if($apianswer["error"]) {
-#		print "ERROR: Can't login";
-#		die();
-#	} 
-#}
+$uapi = new UbiAPI($config["ubi-email"],$config["ubi-password"]);
 
 $data = array();
 
+
+$platform = $config["default-platform"];
+if(isset($_GET['platform'])) {
+	$platform = $_GET['platform'];
+}
+
+
+
 function printName($uid) {
-	global $uapi, $data, $id;
-	$su = $uapi->searchUser("byid",$uid);
+	global $uapi, $data, $id, $platform;
+	$su = $uapi->searchUser("byid",$uid, $platform);
 	if($su["error"] != true){
 		$data[] = array("profile_id" =>$su['uid'], "nickname" => $su['nick']);
 	}
 }
 
 function printID($name) {
-	global $uapi, $data, $id;
-	$su = $uapi->searchUser("bynick",$name);
+	global $uapi, $data, $id, $platform;
+	$su = $uapi->searchUser("bynick",$name, $platform);
 	if($su["error"] != true){
-		$data[] = array("profile_id"=> $su['uid'] , "nickname" => $su['nick']);
+		$data[] = array("profile_id"=> $su['uid'] , "nickname" => $su['nick'], "platform" => $platform);
 	}
 }
 
@@ -59,7 +57,7 @@ if(isset($_GET["id"])) {
 	}else{
 		$tocheck = array($str);
 	}
-	
+
 	foreach ($tocheck as $value) {
 		printName($value);
 	}
@@ -71,7 +69,7 @@ if(isset($_GET["name"])) {
 	}else{
 		$tocheck = array($str);
 	}
-	
+
 	foreach ($tocheck as $value) {
 		printID($value);
 	}

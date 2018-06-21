@@ -23,41 +23,38 @@ if(!isset($_GET["id"]) && !isset($_GET["name"])) {
 
 
 
-include("uAPI.php");
+include("UbiAPI.php");
 
-$uapi = new ubiapi($config["ubi-email"],$config["ubi-password"],null);
-$rt = $uapi->refreshTicket("bynick","AE_SeemsLegit");
-
-if($rt["error"]){
-	$apianswer = $uapi->login(1);
-	if($apianswer["error"]) {
-		print "ERROR: Can't login";
-		die();
-	} 
-}
+$uapi = new UbiAPI($config["ubi-email"],$config["ubi-password"]);
 
 $data = array();
 $region = $config["default-region"];
 $season = -1;
 
 if(isset($_GET['season'])) {
-	$season = $_GET['season'];	
+	$season = $_GET['season'];
 }
+
+$platform = $config["default-platform"];
+if(isset($_GET['platform'])) {
+	$platform = $_GET['platform'];
+}
+
 if(isset($_GET['region'])) {
-	$region = $_GET['region'];	
+	$region = $_GET['region'];
 }
 
 function printName($uid) {
-	global $uapi, $data, $id;
-	$su = $uapi->searchUser("byid",$uid);
+	global $uapi, $data, $id, $platform;
+	$su = $uapi->searchUser("byid",$uid, $platform);
 	if($su["error"] != true){
 		$data[$su['uid']] = array("profile_id" =>$su['uid'], "nickname" => $su['nick']);
 	}
 }
 
 function printID($name) {
-	global $uapi, $data, $id;
-	$su = $uapi->searchUser("bynick",$name);
+	global $uapi, $data, $id, $platform;
+	$su = $uapi->searchUser("bynick",$name, $platform);
 	if($su["error"] != true){
 		$data[$su['uid']] = array("profile_id"=> $su['uid'] , "nickname" => $su['nick']);
 	}
@@ -70,7 +67,7 @@ if(isset($_GET["id"])) {
 	}else{
 		$tocheck = array($str);
 	}
-	
+
 	foreach ($tocheck as $value) {
 		printName($value);
 	}
@@ -82,7 +79,7 @@ if(isset($_GET["name"])) {
 	}else{
 		$tocheck = array($str);
 	}
-	
+
 	foreach ($tocheck as $value) {
 		printID($value);
 	}
@@ -98,11 +95,11 @@ foreach ($data as $value) {
 }
 $ids = substr($ids, 1);
 
-$idresponse = json_decode($uapi->getRanking($ids, $season, $region), true);
+$idresponse = json_decode($uapi->getRanking($ids, $season, $region, $platform), true);
 $final = array();
 foreach($idresponse["players"] as $value) {
 	$id = $value["profile_id"];
-	$final[$id] = array_merge($value, array("nickname"=>$data[$id]["nickname"]));
+	$final[$id] = array_merge($value, array("nickname"=>$data[$id]["nickname"], "platform" => $platform));
 }
 print json_encode(array("players" => $final));
 ?>
