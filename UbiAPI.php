@@ -1,5 +1,7 @@
 <?php
 
+require_once("Operators.php");
+
 class UbiAPI{
   private $b64authcreds;
 	public $http_useragent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36";
@@ -66,6 +68,41 @@ class UbiAPI{
       "json"=>$jsonoutput,
       "nick"=>$jsonoutput['profiles'][0]['nameOnPlatform'],
       "uid"=>$jsonoutput['profiles'][0]['profileId']);
+  }
+
+  public function getOperators($users, $platform) {
+    global $operators;
+    $stats = "operatorpvp_smoke_poisongaskill,operatorpvp_timeplayed,operatorpvp_roundwon,operatorpvp_roundlost,operatorpvp_kills,operatorpvp_death,operatorpvp_mute_gadgetjammed,operatorpvp_sledge_hammerhole,operatorpvp_thatcher_gadgetdestroywithemp,operatorpvp_castle_kevlarbarricadedeployed,operatorpvp_ash_bonfirewallbreached,operatorpvp_pulse_heartbeatspot,operatorpvp_thermite_reinforcementbreached,operatorpvp_doc_teammaterevive,operatorpvp_rook_armortakenteammate,operatorpvp_twitch_gadgetdestroybyshockdrone,operatorpvp_montagne_shieldblockdamage,operatorpvp_glaz_sniperkill,operatorpvp_fuze_clusterchargekill,operatorpvp_kapkan_boobytrapkill,operatorpvp_tachanka_turretkill,operatorpvp_blitz_flashedenemy,operatorpvp_iq_gadgetspotbyef,operatorpvp_jager_gadgetdestroybycatcher,operatorpvp_bandit_batterykill,operatorpvp_buck_kill,operatorpvp_frost_dbno,operatorpvp_blackbeard_gunshieldblockdamage,operatorpvp_valkyrie_camdeployed,operatorpvp_capitao_lethaldartkills,operatorpvp_caveira_interrogations,operatorpvp_hibana_detonate_projectile,operatorpvp_echo_enemy_sonicburst_affected,operatorpvp_cazador_assist_kill,operatorpvp_black_mirror_gadget_deployed,operatorpvp_dazzler_gadget_detonate,operatorpvp_caltrop_enemy_affected,operatorpvp_concussionmine_detonate,operatorpvp_concussiongrenade_detonate,operatorpvp_phoneshacked,operatorpvp_attackerdrone_diminishedrealitymode,operatorpvp_tagger_tagdevice_spot,operatorpvp_rush_adrenalinerush,operatorpvp_barrage_killswithturret,operatorpvp_deceiver_revealedattackers";
+    $stats = $this->getStatsRaw($users, $stats, $platform);
+    $stats = json_decode($stats, true)["results"];
+    $final = array();
+    $normalStats = array("operatorpvp_roundlost", "operatorpvp_death", "operatorpvp_roundwon", "operatorpvp_kills", "operatorpvp_death", "operatorpvp_timeplayed");
+
+    foreach($stats as $id=>$value) {
+      $final[$id] = array();
+      foreach($operators as $operator=>$info) {
+        $index = $info["index"];
+        $final[$id][$operator] = array();
+        $info = $info["stats"];
+        foreach($normalStats as $stat) {
+          $rstat = $stat . ":" . $index;
+          if(isset($value[$rstat])) {
+            $final[$id][$operator][$stat] = $value[$rstat];
+          }else{
+            $final[$id][$operator][$stat] = 0;
+          }
+        }
+        foreach ($info as $stat) {
+          $rstat = explode(":", $stat)[0];
+          if(isset($value[$stat])) {
+            $final[$id][$operator][$rstat] = $value[$stat];
+          }else{
+            $final[$id][$operator][$rstat] = 0;
+          }
+        }
+      }
+    }
+    return json_encode($final);
   }
 
   public function getStats($users, $stats, $platform){
