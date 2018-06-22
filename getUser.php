@@ -21,7 +21,13 @@ if(!isset($_GET["id"]) && !isset($_GET["name"])) {
 	die();
 }
 
-
+$loadProgression = $config["default-progression"];
+if(isset($_GET["progression"])) {
+	$loadProgression = $_GET["progression"];
+}
+if($loadProgression != "true" && $loadProgression != "false") {
+	$loadProgression = $config["default-progression"];
+}
 
 include("UbiAPI.php");
 
@@ -105,11 +111,13 @@ foreach ($data as $value) {
 $ids = substr($ids, 1);
 
 $idresponse = json_decode($uapi->getRanking($ids, $season, $region, $platform), true);
-$progression = json_decode($uapi->getProgression($ids, $platform), true)["player_profiles"];
+if($loadProgression == "true") {
+		$progression = json_decode($uapi->getProgression($ids, $platform), true)["player_profiles"];
+}
 $final = array();
 foreach($idresponse["players"] as $value) {
 	$id = $value["profile_id"];
-	$final[$id] = array_merge(getValue($id,$progression),$value, array("nickname"=>$data[$id]["nickname"], "platform" => $platform));
+	$final[$id] = array_merge(($loadProgression == "true" ? getValue($id,$progression) : array()),$value, array("nickname"=>$data[$id]["nickname"], "platform" => $platform));
 }
 print json_encode(array("players" => $final));
 ?>
