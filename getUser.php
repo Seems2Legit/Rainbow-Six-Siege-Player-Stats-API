@@ -89,6 +89,15 @@ if(empty($data)) {
 		die(json_encode(array("players" => array())));
 }
 
+function getValue($user, $progression) {
+	foreach($progression as $usera) {
+		if($usera["profile_id"] == $user) {
+			return $usera;
+		}
+	}
+	return array();
+}
+
 $ids = "";
 foreach ($data as $value) {
 	$ids = $ids . "," . $value["profile_id"];
@@ -96,10 +105,11 @@ foreach ($data as $value) {
 $ids = substr($ids, 1);
 
 $idresponse = json_decode($uapi->getRanking($ids, $season, $region, $platform), true);
+$progression = json_decode($uapi->getProgression($ids, $platform), true)["player_profiles"];
 $final = array();
 foreach($idresponse["players"] as $value) {
 	$id = $value["profile_id"];
-	$final[$id] = array_merge($value, array("nickname"=>$data[$id]["nickname"], "platform" => $platform));
+	$final[$id] = array_merge(getValue($id,$progression),$value, array("nickname"=>$data[$id]["nickname"], "platform" => $platform));
 }
 print json_encode(array("players" => $final));
 ?>

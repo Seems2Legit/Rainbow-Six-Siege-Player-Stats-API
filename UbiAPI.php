@@ -157,7 +157,37 @@ class UbiAPI{
     return $ubioutput;
   }
 
+  public function getProgression($users, $platform){
+    $user = explode(",", $users)[0];
+    $request_urls = array("uplay" =>
+      "https://public-ubiservices.ubi.com/v1/spaces/5172a557-50b5-4665-b7db-e3f2e8c5041d/sandboxes/OSBOR_PC_LNCH_A/r6playerprofile/playerprofile/progressions"
+      ,"xbl" =>
+      "https://public-ubiservices.ubi.com/v1/spaces/98a601e5-ca91-4440-b1c5-753f601a2c90/sandboxes/OSBOR_XBOXONE_LNCH_A/r6playerprofile/playerprofile/progressions"
+      ,"psn" =>
+      "https://public-ubiservices.ubi.com/v1/spaces/05bfb3f7-6c21-4c42-be1f-97a33fb5cf66/sandboxes/OSBOR_PS4_LNCH_A/r6playerprofile/playerprofile/progressions"
+    );
 
+    $request_url = $request_urls[$platform] . "?profile_ids=$users";
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $request_url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    $headers =[
+    "Authorization: ".$this->uplayticket(),
+    "Origin: https://game-rainbow6.ubi.com",
+    "Accept-Encoding: deflate, br",
+    "Host: public-ubiservices.ubi.com",
+    "Accept-Language: de-DE,de;q=0.9,en-US;q=0.8,en;q=0.7",
+    "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36 OPR/52.0.2871.99",
+    "Accept: application/json, text/plain, */*",
+    "Ubi-AppId: 39baebad-39e5-4552-8c25-2c9b919064e2",
+    "Ubi-SessionId: a4df2e5c-7fee-41ff-afe5-9d79e68e8048",
+    "Referer: https://game-rainbow6.ubi.com/de-de/uplay/player-statistics/$user/multiplayer",
+    "Connection: keep-alive"];
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+    $ubioutput = curl_exec($ch);
+    curl_close($ch);
+    return $ubioutput;
+  }
 
   public function login(){
     $request_url = "https://connect.ubi.com/ubiservices/v2/profiles/sessions";
