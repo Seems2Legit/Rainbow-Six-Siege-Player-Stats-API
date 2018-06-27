@@ -376,7 +376,7 @@ Once finished you can safely delete output.json file and move Operators.php file
 Manually editing of Operators.php file is *not* recommended.
 
 ### Error Handling:
-If a function encounter errors like "Too many calls", it add an "error" object in response json.
+If a function encounter errors like "Too many calls", api add an "error" object in json that contains detailed response from ubisoft servers.
 
 Response:
 ```
@@ -405,4 +405,4 @@ Response:
 
 Thanks to Seems2Legit and special thanks to K4CZP3R. They made this whole project even possible.
 
-Updated: 27.06.2018 07:00 UTC
+Updated: 27.06.2018 13:20 UTC
