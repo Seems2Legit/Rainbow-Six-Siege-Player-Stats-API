@@ -34,112 +34,112 @@ As you can see it does not matter if you give the api a name or uplay id. It's j
 Here are the example responses from the GET requests mentioned above:
 ```
 {
-  "players": {
-    "735e4640-32d3-484f-ba56-f80030d35337": {
-      "board_id": "pvp_ranked",
-      "past_seasons_abandons": 0,
-      "update_time": "2018-04-08T22:47:21.650000+00:00",
-      "skill_mean": 17.7856229582,
-      "abandons": 2,
-      "season": 9,
-      "region": "emea",
-      "profile_id": "735e4640-32d3-484f-ba56-f80030d35337",
-      "past_seasons_losses": 10,
-      "max_mmr": 2621.04601985,
-      "mmr": 1778.56229582,
-      "wins": 77,
-      "skill_stdev": 3.9493432727,
-      "rank": 5,
-      "losses": 78,
-      "next_rank_mmr": 1800,
-      "past_seasons_wins": 10,
-      "previous_rank_mmr": 1700,
-      "max_rank": 8,
-      "nickname": "AE_BadKey",
-	  "platform": "uplay"
-    }
-  }
+   "players":{
+      "735e4640-32d3-484f-ba56-f80030d35337":{
+         "board_id":"pvp_ranked",
+         "past_seasons_abandons":0,
+         "update_time":"2018-04-08T22:47:21.650000+00:00",
+         "skill_mean":17.7856229582,
+         "abandons":2,
+         "season":9,
+         "region":"emea",
+         "profile_id":"735e4640-32d3-484f-ba56-f80030d35337",
+         "past_seasons_losses":10,
+         "max_mmr":2621.04601985,
+         "mmr":1778.56229582,
+         "wins":77,
+         "skill_stdev":3.9493432727,
+         "rank":5,
+         "losses":78,
+         "next_rank_mmr":1800,
+         "past_seasons_wins":10,
+         "previous_rank_mmr":1700,
+         "max_rank":8,
+         "nickname":"AE_BadKey",
+         "platform":"uplay"
+      }
+   }
 }
 ```
 ```
 {
-  "players": {
-    "a39c7ad5-3282-467c-bc85-f65b0e61cde4": {
-      "board_id": "pvp_ranked",
-      "past_seasons_abandons": 0,
-      "update_time": "2018-04-08T16:05:13.150000+00:00",
-      "skill_mean": 26.2664770288,
-      "abandons": 0,
-      "season": 9,
-      "region": "emea",
-      "profile_id": "a39c7ad5-3282-467c-bc85-f65b0e61cde4",
-      "past_seasons_losses": 19,
-      "max_mmr": 2839.11421816,
-      "mmr": 2626.64770288,
-      "wins": 34,
-      "skill_stdev": 5.28927628982,
-      "rank": 13,
-      "losses": 31,
-      "next_rank_mmr": 2700,
-      "past_seasons_wins": 8,
-      "previous_rank_mmr": 2500,
-      "max_rank": 14,
-      "nickname": "AE_SeemsLegit",
-	  "platform": "uplay"
-    }
-  }
+   "players":{
+      "a39c7ad5-3282-467c-bc85-f65b0e61cde4":{
+         "board_id":"pvp_ranked",
+         "past_seasons_abandons":0,
+         "update_time":"2018-04-08T16:05:13.150000+00:00",
+         "skill_mean":26.2664770288,
+         "abandons":0,
+         "season":9,
+         "region":"emea",
+         "profile_id":"a39c7ad5-3282-467c-bc85-f65b0e61cde4",
+         "past_seasons_losses":19,
+         "max_mmr":2839.11421816,
+         "mmr":2626.64770288,
+         "wins":34,
+         "skill_stdev":5.28927628982,
+         "rank":13,
+         "losses":31,
+         "next_rank_mmr":2700,
+         "past_seasons_wins":8,
+         "previous_rank_mmr":2500,
+         "max_rank":14,
+         "nickname":"AE_SeemsLegit",
+         "platform":"uplay"
+      }
+   }
 }
 ```
 ```
 {
-  "players": {
-    "735e4640-32d3-484f-ba56-f80030d35337": {
-      "board_id": "pvp_ranked",
-      "past_seasons_abandons": 0,
-      "update_time": "2018-04-08T22:47:21.650000+00:00",
-      "skill_mean": 17.7856229582,
-      "abandons": 2,
-      "season": 9,
-      "region": "emea",
-      "profile_id": "735e4640-32d3-484f-ba56-f80030d35337",
-      "past_seasons_losses": 10,
-      "max_mmr": 2621.04601985,
-      "mmr": 1778.56229582,
-      "wins": 77,
-      "skill_stdev": 3.9493432727,
-      "rank": 5,
-      "losses": 78,
-      "next_rank_mmr": 1800,
-      "past_seasons_wins": 10,
-      "previous_rank_mmr": 1700,
-      "max_rank": 8,
-      "nickname": "AE_BadKey",
-	  "platform": "uplay"
-    },
-    "a39c7ad5-3282-467c-bc85-f65b0e61cde4": {
-      "board_id": "pvp_ranked",
-      "past_seasons_abandons": 0,
-      "update_time": "2018-04-08T16:05:13.150000+00:00",
-      "skill_mean": 26.2664770288,
-      "abandons": 0,
-      "season": 9,
-      "region": "emea",
-      "profile_id": "a39c7ad5-3282-467c-bc85-f65b0e61cde4",
-      "past_seasons_losses": 19,
-      "max_mmr": 2839.11421816,
-      "mmr": 2626.64770288,
-      "wins": 34,
-      "skill_stdev": 5.28927628982,
-      "rank": 13,
-      "losses": 31,
-      "next_rank_mmr": 2700,
-      "past_seasons_wins": 8,
-      "previous_rank_mmr": 2500,
-      "max_rank": 14,
-      "nickname": "AE_SeemsLegit",
-	  "platform": "uplay"
-    }
-  }
+   "players":{
+      "735e4640-32d3-484f-ba56-f80030d35337":{
+         "board_id":"pvp_ranked",
+         "past_seasons_abandons":0,
+         "update_time":"2018-04-08T22:47:21.650000+00:00",
+         "skill_mean":17.7856229582,
+         "abandons":2,
+         "season":9,
+         "region":"emea",
+         "profile_id":"735e4640-32d3-484f-ba56-f80030d35337",
+         "past_seasons_losses":10,
+         "max_mmr":2621.04601985,
+         "mmr":1778.56229582,
+         "wins":77,
+         "skill_stdev":3.9493432727,
+         "rank":5,
+         "losses":78,
+         "next_rank_mmr":1800,
+         "past_seasons_wins":10,
+         "previous_rank_mmr":1700,
+         "max_rank":8,
+         "nickname":"AE_BadKey",
+         "platform":"uplay"
+      },
+      "a39c7ad5-3282-467c-bc85-f65b0e61cde4":{
+         "board_id":"pvp_ranked",
+         "past_seasons_abandons":0,
+         "update_time":"2018-04-08T16:05:13.150000+00:00",
+         "skill_mean":26.2664770288,
+         "abandons":0,
+         "season":9,
+         "region":"emea",
+         "profile_id":"a39c7ad5-3282-467c-bc85-f65b0e61cde4",
+         "past_seasons_losses":19,
+         "max_mmr":2839.11421816,
+         "mmr":2626.64770288,
+         "wins":34,
+         "skill_stdev":5.28927628982,
+         "rank":13,
+         "losses":31,
+         "next_rank_mmr":2700,
+         "past_seasons_wins":8,
+         "previous_rank_mmr":2500,
+         "max_rank":14,
+         "nickname":"AE_SeemsLegit",
+         "platform":"uplay"
+      }
+   }
 }
 ```
 ```
@@ -202,10 +202,9 @@ Here are the example responses from the GET requests mentioned above:
       }
    }
 }
-
 ```
 ### getSmallUser.php:
-This function only returns the uplayID, the uplay name of any given person(s) (by uid or name) and the relative platforms.
+This function only returns the uplayID, the uplay name of any given player(s) (by uid or name) and the relative platforms.
 
 ### Optional Arguments:
 ```
@@ -221,34 +220,34 @@ https://gassner.online/api/r6/getSmallUser.php?id=735e4640-32d3-484f-ba56-f80030
 Responses:
 ```
 [
-  {
-    "profile_id": "a39c7ad5-3282-467c-bc85-f65b0e61cde4",
-    "nickname": "AE_SeemsLegit",
-	"platform": "uplay"
-  },
-  {
-    "profile_id": "735e4640-32d3-484f-ba56-f80030d35337",
-    "nickname": "AE_BadKey",
-	"platform": "uplay"
-  }
+   {
+      "profile_id":"a39c7ad5-3282-467c-bc85-f65b0e61cde4",
+      "nickname":"AE_SeemsLegit",
+      "platform":"uplay"
+   },
+   {
+      "profile_id":"735e4640-32d3-484f-ba56-f80030d35337",
+      "nickname":"AE_BadKey",
+      "platform":"uplay"
+   }
 ]
 ```
 ```
 [
-  {
-    "profile_id": "735e4640-32d3-484f-ba56-f80030d35337",
-    "nickname": "AE_SeemsLegit",
-	"platform": "uplay"
-  }
+   {
+      "profile_id":"735e4640-32d3-484f-ba56-f80030d35337",
+      "nickname":"AE_SeemsLegit",
+      "platform":"uplay"
+   }
 ]
 ```
 ```
 [
-  {
-    "profile_id": "735e4640-32d3-484f-ba56-f80030d35337",
-    "nickname": "AE_BadKey",
-	"platform": "uplay"
-  }
+   {
+      "profile_id":"735e4640-32d3-484f-ba56-f80030d35337",
+      "nickname":"AE_BadKey",
+      "platform":"uplay"
+   }
 ]
 ```
 
@@ -269,18 +268,18 @@ https://gassner.online/api/r6/getStats.php?id=a39c7ad5-3282-467c-bc85-f65b0e61cd
 Responses:
 ```
 {
-  "players": {
-    "a39c7ad5-3282-467c-bc85-f65b0e61cde4": {
-      "casualpvp_matchwon": 126,
-      "casualpvp_kills": 723,
-      "casualpvp_death": 773,
-      "casualpvp_matchlost": 130,
-      "casualpvp_matchplayed": 256,
-      "casualpvp_timeplayed": 204662,
-      "nickname": "AE_SeemsLegit",
-	  "platform": "uplay"
-    }
-  }
+   "players":{
+      "a39c7ad5-3282-467c-bc85-f65b0e61cde4":{
+         "casualpvp_matchwon":126,
+         "casualpvp_kills":723,
+         "casualpvp_death":773,
+         "casualpvp_matchlost":130,
+         "casualpvp_matchplayed":256,
+         "casualpvp_timeplayed":204662,
+         "nickname":"AE_SeemsLegit",
+         "platform":"uplay"
+      }
+   }
 }
 ```
 
