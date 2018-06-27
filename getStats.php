@@ -86,7 +86,12 @@ if(isset($_GET["name"])) {
 }
 
 if(empty($data)) {
-		die(json_encode(array("players" => array())));
+		$error = $uapi->getErrorMessage();
+		if($error === false) {
+			die(json_encode(array("players" => array())));
+		}else{
+			die(json_encode(array("players" => array(), "error" => $error)));
+		}
 }
 
 $ids = "";

@@ -10,6 +10,14 @@ class UbiAPI{
 		$this->b64authcreds=$this->generateB64Creds($email.":".$password);
 	}
 
+  public function getErrorMessage() {
+    $ticket = json_decode($this->saveTicket(false), true);
+    if(isset($ticket["errorCode"])) {
+      return $ticket;
+    }
+    return false;
+  }
+
   public function generateB64Creds($emailandpassword){
     return base64_encode($emailandpassword);
   }
