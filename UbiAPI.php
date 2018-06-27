@@ -276,7 +276,7 @@ class UbiAPI{
 
   public function uplayticket($check = true) {
     $ticket = json_decode($this->saveTicket(false), true);
-    if((!isset($ticket["expiration"]) || isset($ticket["error"]) && $ticket["error"] == true) && $check) {
+    if((!isset($ticket["expiration"]) || isset($ticket["error"]) && $ticket["error"] == true || isset($ticket["errorCode"])) && $check) {
       $this->login();
       return $this->uplayticket(false);
     }else if($check) {
@@ -285,6 +285,9 @@ class UbiAPI{
         $this->login();
         return $this->uplayticket(false);
       }
+    }
+    if(!isset($ticket["ticket"])) {
+      return "";
     }
     $ticket = $ticket["ticket"];
 
