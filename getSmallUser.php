@@ -20,19 +20,17 @@ if(!isset($_GET["id"]) && !isset($_GET["name"])) {
 	print "ERROR: Wrong usage";
 	die();
 }
+
 include("UbiAPI.php");
 
 $uapi = new UbiAPI($config["ubi-email"],$config["ubi-password"]);
 
 $data = array();
 
-
 $platform = $config["default-platform"];
 if(isset($_GET['platform'])) {
 	$platform = $_GET['platform'];
 }
-
-
 
 function printName($uid) {
 	global $uapi, $data, $id, $platform;

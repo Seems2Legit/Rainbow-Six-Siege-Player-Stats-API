@@ -375,6 +375,27 @@ When it request operators.json url, put your url or ubi url (https://ubistatic-a
 Once finished you can safely delete output.json file and move Operators.php file to parent directory (overwriting old file).\
 Manually editing of Operators.php file is *not* recommended.
 
+### Error Handling:
+If a function encounter errors like "Too many calls", api add an "error" object in json that contains detailed response from ubisoft servers.
+
+Response:
+```
+{
+   "players":[
+
+   ],
+   "error":{
+      "message":"Too many calls per profile id: 6eb1a73b-e20b-4bcf-92c3-26f046f8a302",
+      "errorCode":1100,
+      "httpCode":429,
+      "errorContext":"Profiles Client Legacy",
+      "moreInfo":"6/27/2018 11:10:52 AM",
+      "transactionTime":"2018-06-27T10:55:56.8938985Z",
+      "transactionId":"a7056a14-faee-4c02-8e13-38ed85399eb2"
+   }
+}
+```
+
 ## Todo:
 - Add config.php - Done
 - Kills and deaths - Done
@@ -384,4 +405,4 @@ Manually editing of Operators.php file is *not* recommended.
 
 Thanks to Seems2Legit and special thanks to K4CZP3R. They made this whole project even possible.
 
-Updated: 27.06.2018 07:00 UTC
+Updated: 27.06.2018 13:20 UTC

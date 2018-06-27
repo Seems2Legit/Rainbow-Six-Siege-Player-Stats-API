@@ -12,5 +12,4 @@ $config = array(
 	"default-progression" => "true" //Enabled: true - false
 );
 
-
 ?>

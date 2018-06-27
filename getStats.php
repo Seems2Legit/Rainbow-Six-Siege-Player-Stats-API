@@ -21,8 +21,6 @@ if(!isset($_GET["id"]) && !isset($_GET["name"])) {
 	die();
 }
 
-
-
 include("UbiAPI.php");
 
 $uapi = new UbiAPI($config["ubi-email"],$config["ubi-password"]);
