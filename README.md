@@ -361,8 +361,8 @@ Responses (stripped for readability):
 }
 ```
 
-### Extras folder:
-If there are new available operators, you should launch updateOperators.bat (or .sh, depends on your platform) and it will rewrite Operators.php automatically by executing a java program.
+### Extras Folder:
+If there are new available operators, you should launch updateOperators.bat (or .sh, depends on your platform) and it will rewrite Operators.php automatically by executing a java program.\
 So, your machine must have java installed to launch executable, and file must have **execute** permission.
 
 Example for unix:
@@ -371,8 +371,8 @@ cd extras
 chmod +x updateOperators.sh
 ./updateOperators.sh
 ```
-When it request operators.json url, put your url or ubi url (https://ubistatic-a.akamaihd.net/0058/prod/assets/data/operators.3a2655c8.json) to start loading data.
-Once finished you can safely delete output.json file and move Operators.php file to parent directory (overwriting old file).
+When it request operators.json url, put your url or ubi url (https://ubistatic-a.akamaihd.net/0058/prod/assets/data/operators.3a2655c8.json) to start loading data.\
+Once finished you can safely delete output.json file and move Operators.php file to parent directory (overwriting old file).\
 Manually editing of Operators.php file is *not* recommended.
 
 ## Todo:
