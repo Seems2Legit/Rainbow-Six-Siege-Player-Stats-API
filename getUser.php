@@ -92,7 +92,7 @@ if(isset($_GET["name"])) {
 }
 
 if(empty($data)) {
-		die(json_encode(array("players" => array())));
+	die(json_encode(array("players" => array())));
 }
 
 function getValue($user, $progression) {
@@ -112,7 +112,7 @@ $ids = substr($ids, 1);
 
 $idresponse = json_decode($uapi->getRanking($ids, $season, $region, $platform), true);
 if($loadProgression == "true") {
-		$progression = json_decode($uapi->getProgression($ids, $platform), true)["player_profiles"];
+	$progression = json_decode($uapi->getProgression($ids, $platform), true)["player_profiles"];
 }
 $final = array();
 foreach($idresponse["players"] as $value) {

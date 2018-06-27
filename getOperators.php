@@ -75,7 +75,7 @@ if(isset($_GET["name"])) {
 }
 
 if(empty($data)) {
-		die(json_encode(array("players" => array())));
+	die(json_encode(array("players" => array())));
 }
 
 $ids = "";

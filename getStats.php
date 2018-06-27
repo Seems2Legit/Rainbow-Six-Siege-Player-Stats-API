@@ -21,8 +21,6 @@ if(!isset($_GET["id"]) && !isset($_GET["name"])) {
 	die();
 }
 
-
-
 include("UbiAPI.php");
 
 $uapi = new UbiAPI($config["ubi-email"],$config["ubi-password"]);
@@ -86,7 +84,7 @@ if(isset($_GET["name"])) {
 }
 
 if(empty($data)) {
-		die(json_encode(array("players" => array())));
+	die(json_encode(array("players" => array())));
 }
 
 $ids = "";
