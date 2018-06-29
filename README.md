@@ -32,7 +32,7 @@ As you can see it does not matter if you give the api a name or uplay id. It's j
 ```
 
 Here are the example responses from the GET requests mentioned above:
-```
+```json
 {
    "players":{
       "735e4640-32d3-484f-ba56-f80030d35337":{
@@ -61,7 +61,7 @@ Here are the example responses from the GET requests mentioned above:
    }
 }
 ```
-```
+```json
 {
    "players":{
       "a39c7ad5-3282-467c-bc85-f65b0e61cde4":{
@@ -90,7 +90,7 @@ Here are the example responses from the GET requests mentioned above:
    }
 }
 ```
-```
+```json
 {
    "players":{
       "735e4640-32d3-484f-ba56-f80030d35337":{
@@ -142,7 +142,7 @@ Here are the example responses from the GET requests mentioned above:
    }
 }
 ```
-```
+```json
 {
    "players":{
       "a39c7ad5-3282-467c-bc85-f65b0e61cde4":{
@@ -171,7 +171,7 @@ Here are the example responses from the GET requests mentioned above:
    }
 }
 ```
-```
+```json
 {
    "players":{
       "735e4640-32d3-484f-ba56-f80030d35337":{
@@ -218,7 +218,7 @@ https://gassner.online/api/r6/getSmallUser.php?name=AE_SeemsLegit&appcode=test
 https://gassner.online/api/r6/getSmallUser.php?id=735e4640-32d3-484f-ba56-f80030d35337&appcode=test
 ```
 Responses:
-```
+```json
 [
    {
       "profile_id":"a39c7ad5-3282-467c-bc85-f65b0e61cde4",
@@ -232,7 +232,7 @@ Responses:
    }
 ]
 ```
-```
+```json
 [
    {
       "profile_id":"735e4640-32d3-484f-ba56-f80030d35337",
@@ -241,7 +241,7 @@ Responses:
    }
 ]
 ```
-```
+```json
 [
    {
       "profile_id":"735e4640-32d3-484f-ba56-f80030d35337",
@@ -266,7 +266,7 @@ https://gassner.online/api/r6/getStats.php?id=a39c7ad5-3282-467c-bc85-f65b0e61cd
 ```
 
 Responses:
-```
+```json
 {
    "players":{
       "a39c7ad5-3282-467c-bc85-f65b0e61cde4":{
@@ -297,7 +297,7 @@ https://gassner.online/api/r6/getOperators.php?id=a39c7ad5-3282-467c-bc85-f65b0e
 ```
 
 Responses (stripped for readability):
-```
+```json
 {
    "players":{
       "a39c7ad5-3282-467c-bc85-f65b0e61cde4":{
@@ -366,7 +366,7 @@ If there are new available operators, you should launch updateOperators.bat (or 
 So, your machine must have java installed to launch executable, and file must have **execute** permission.
 
 Example for unix:
-```
+```sh
 cd extras
 chmod +x updateOperators.sh
 ./updateOperators.sh
@@ -379,7 +379,7 @@ Manually editing of Operators.php file is *not* recommended.
 If a function encounter errors like "Too many calls", api add an "error" object in json that contains detailed response from ubisoft servers.
 
 Response:
-```
+```json
 {
    "players":[
 
