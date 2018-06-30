@@ -1,215 +1,250 @@
 <?php
-include("config.php");
+include ("config.php");
 
-if(empty($_GET)) {
+if (empty($_GET)) {
 	print "ERROR: Wrong usage";
 	die();
 }
 
-if(!isset($_GET["appcode"])) {
+if (!isset($_GET["appcode"])) {
 	print "ERROR: Wrong appcode";
 	die();
 }
 
-if($_GET["appcode"] != $config["appcode"]) {
+if ($_GET["appcode"] != $config["appcode"]) {
 	print "ERROR: Wrong appcode";
 	die();
 }
 
-if(!isset($_GET["id"]) && !isset($_GET["name"])) {
+if (!isset($_GET["id"]) && !isset($_GET["name"])) {
 	print "ERROR: Wrong usage";
 	die();
 }
 
 $loadProgression = $config["default-progression"];
-if(isset($_GET["progression"])) {
+
+if (isset($_GET["progression"])) {
 	$loadProgression = $_GET["progression"];
 }
-if($loadProgression != "true" && $loadProgression != "false") {
+
+if ($loadProgression != "true" && $loadProgression != "false") {
 	$loadProgression = $config["default-progression"];
 }
 
-include("UbiAPI.php");
+include ("UbiAPI.php");
 
-$uapi = new UbiAPI($config["ubi-email"],$config["ubi-password"]);
-
+$uapi = new UbiAPI($config["ubi-email"], $config["ubi-password"]);
 $data = array();
 $region = $config["default-region"];
 $season = -1;
 
-if(isset($_GET['season'])) {
+if (isset($_GET['season'])) {
 	$season = $_GET['season'];
 }
 
 $platform = $config["default-platform"];
-if(isset($_GET['platform'])) {
+
+if (isset($_GET['platform'])) {
 	$platform = $_GET['platform'];
 }
 
-if(isset($_GET['region'])) {
+if (isset($_GET['region'])) {
 	$region = $_GET['region'];
 }
 
-function printName($uid) {
+function printName($uid)
+{
 	global $uapi, $data, $id, $platform;
-	$su = $uapi->searchUser("byid",$uid, $platform);
-	if($su["error"] != true){
-		$data[$su['uid']] = array("profile_id" =>$su['uid'], "nickname" => $su['nick']);
+	$su = $uapi->searchUser("byid", $uid, $platform);
+	if ($su["error"] != true) {
+		$data[$su['uid']] = array(
+			"profile_id" => $su['uid'],
+			"nickname" => $su['nick']
+		);
 	}
 }
 
-function printID($name) {
+function printID($name)
+{
 	global $uapi, $data, $id, $platform;
-	$su = $uapi->searchUser("bynick",$name, $platform);
-	if($su["error"] != true){
-		$data[$su['uid']] = array("profile_id"=> $su['uid'] , "nickname" => $su['nick']);
+	$su = $uapi->searchUser("bynick", $name, $platform);
+	if ($su["error"] != true) {
+		$data[$su['uid']] = array(
+			"profile_id" => $su['uid'],
+			"nickname" => $su['nick']
+		);
 	}
 }
 
-if(isset($_GET["id"])) {
+if (isset($_GET["id"])) {
 	$str = $_GET["id"];
 	if (strpos($str, ',') !== false) {
 		$tocheck = explode(',', $str);
-	}else{
-		$tocheck = array($str);
+	}
+	else {
+		$tocheck = array(
+			$str
+		);
 	}
 
-	foreach ($tocheck as $value) {
+	foreach($tocheck as $value) {
 		printName($value);
 	}
 }
-if(isset($_GET["name"])) {
+
+if (isset($_GET["name"])) {
 	$str = $_GET["name"];
 	if (strpos($str, ',') !== false) {
 		$tocheck = explode(',', $str);
-	}else{
-		$tocheck = array($str);
+	}
+	else {
+		$tocheck = array(
+			$str
+		);
 	}
 
-	foreach ($tocheck as $value) {
+	foreach($tocheck as $value) {
 		printID($value);
 	}
 }
 
-if(empty($data)) {
+if (empty($data)) {
 	$error = $uapi->getErrorMessage();
-	if($error === false) {
-		die(json_encode(array("players" => array())));
-	}else{
-		die(json_encode(array("players" => array(), "error" => $error)));
+	if ($error === false) {
+		die(json_encode(array(
+			"players" => array()
+		)));
+	}
+	else {
+		die(json_encode(array(
+			"players" => array() ,
+			"error" => $error
+		)));
 	}
 }
 
-function getValue($user, $progression) {
+function getValue($user, $progression)
+{
 	foreach($progression as $usera) {
-		if($usera["profile_id"] == $user) {
+		if ($usera["profile_id"] == $user) {
 			return $usera;
 		}
 	}
+
 	return array();
 }
 
 $ids = "";
-foreach ($data as $value) {
+
+foreach($data as $value) {
 	$ids = $ids . "," . $value["profile_id"];
 }
-$ids = substr($ids, 1);
 
-$idresponse = json_decode($uapi->getRanking($ids, $season, $region, $platform), true);
-if($loadProgression == "true") {
-	$progression = json_decode($uapi->getProgression($ids, $platform), true)["player_profiles"];
+$ids = substr($ids, 1);
+$idresponse = json_decode($uapi->getRanking($ids, $season, $region, $platform) , true);
+
+if ($loadProgression == "true") {
+	$progression = json_decode($uapi->getProgression($ids, $platform) , true) ["player_profiles"];
 }
+
 $ranks = json_decode('{
   "0": {
-    "image": "https://i.imgur.com/sB11BIz.png",
+    "image": "https://i.imgur.com/jNJ1BBl.png",
     "name": "Unranked"
   },
-  "13": {
-    "image": "https://i.imgur.com/6Qg6aaH.jpg",
-    "name": "Gold 4"
-  },
-  "15": {
-    "image": "https://i.imgur.com/ELbGMc7.jpg",
-    "name": "Gold 2"
-  },
-  "14": {
-    "image": "https://i.imgur.com/B0s1o1h.jpg",
-    "name": "Gold 3"
-  },
-  "16": {
-    "image": "https://i.imgur.com/ffDmiPk.jpg",
-    "name": "Gold 1"
-  },
-  "7": {
-    "image": "https://i.imgur.com/9AORiNm.jpg",
-    "name": "Bronze 2"
-  },
-  "9": {
-    "image": "https://i.imgur.com/D36ZfuR.jpg",
-    "name": "Silver 4"
-  },
-  "6": {
-    "image": "https://i.imgur.com/QD5LYD7.jpg",
-    "name": "Bronze 3"
-  },
-  "10": {
-    "image": "https://i.imgur.com/m8GToyF.jpg",
-    "name": "Silver 3"
-  },
-  "5": {
-    "image": "https://i.imgur.com/42AC7RD.jpg",
-    "name": "Bronze 4"
-  },
-  "20": {
-    "image": "https://i.imgur.com/nODE0QI.jpg",
-    "name": "Diamond"
-  },
-  "8": {
-    "image": "https://i.imgur.com/hmPhPBj.jpg",
-    "name": "Bronze 1"
-  },
-  "3": {
-    "image": "https://i.imgur.com/eI11lah.jpg",
-    "name": "Copper 2"
-  },
-  "4": {
-    "image": "https://i.imgur.com/0J0jSWB.jpg",
-    "name": "Copper 1"
-  },
-  "19": {
-    "image": "https://i.imgur.com/xx03Pc5.jpg",
-    "name": "Platinum 1"
-  },
   "1": {
-    "image": "https://i.imgur.com/ehILQ3i.jpg",
-    "name": "Copper 4"
-  },
-  "11": {
-    "image": "https://i.imgur.com/EswGcx1.jpg",
-    "name": "Silver 2"
-  },
-  "18": {
-    "image": "https://i.imgur.com/Uq3WhzZ.jpg",
-    "name": "Platinum 2"
+    "image": "https://i.imgur.com/deTjm7V.png",
+    "name": "Copper Ⅳ"
   },
   "2": {
-    "image": "https://i.imgur.com/6CxJoMn.jpg",
-    "name": "Copper 3"
+    "image": "https://i.imgur.com/zx5KbBO.png",
+    "name": "Copper Ⅲ"
+  },
+  "3": {
+    "image": "https://i.imgur.com/RTCvQDV.png",
+    "name": "Copper Ⅱ"
+  },
+  "4": {
+    "image": "https://i.imgur.com/SN55IoP.png",
+    "name": "Copper Ⅰ"
+  },
+  "5": {
+    "image": "https://i.imgur.com/DmfZeRP.png",
+    "name": "Bronze Ⅳ"
+  },
+  "6": {
+    "image": "https://i.imgur.com/QOuIDW4.png",
+    "name": "Bronze Ⅲ"
+  },
+  "7": {
+    "image": "https://i.imgur.com/ry1KwLe.png",
+    "name": "Bronze Ⅱ"
+  },
+  "8": {
+    "image": "https://i.imgur.com/64eQSbG.png",
+    "name": "Bronze Ⅰ"
+  },
+  "9": {
+    "image": "https://i.imgur.com/fOmokW9.png",
+    "name": "Silver Ⅳ"
+  },
+  "10": {
+    "image": "https://i.imgur.com/e84XmHl.png",
+    "name": "Silver Ⅲ"
+  },
+  "11": {
+    "image": "https://i.imgur.com/f68iB99.png",
+    "name": "Silver Ⅱ"
   },
   "12": {
-    "image": "https://i.imgur.com/KmFpkNc.jpg",
-    "name": "Silver 1"
+    "image": "https://i.imgur.com/iQGr0yz.png",
+    "name": "Silver Ⅰ"
+  },
+  "13": {
+    "image": "https://i.imgur.com/DelhMBP.png",
+    "name": "Gold Ⅳ"
+  },
+  "14": {
+    "image": "https://i.imgur.com/5fYa6cM.png",
+    "name": "Gold Ⅲ"
+  },
+  "15": {
+    "image": "https://i.imgur.com/7c4dBTz.png",
+    "name": "Gold Ⅱ"
+  },
+  "16": {
+    "image": "https://i.imgur.com/cOFgDW5.png",
+    "name": "Gold Ⅰ"
   },
   "17": {
-    "image": "https://i.imgur.com/Sv3PQQE.jpg",
-    "name": "Platinum 3"
+    "image": "https://i.imgur.com/to1cRGC.png",
+    "name": "Platinum Ⅲ"
+  },
+  "18": {
+    "image": "https://i.imgur.com/vcIEaEz.png",
+    "name": "Platinum Ⅱ"
+  },
+  "19": {
+    "image": "https://i.imgur.com/HAU5DLj.png",
+    "name": "Platinum Ⅰ"
+  },
+  "20": {
+    "image": "https://i.imgur.com/Rt6c2om.png",
+    "name": "Diamond Ⅰ"
   }
 }', true);
-
 $final = array();
+
 foreach($idresponse["players"] as $value) {
 	$id = $value["profile_id"];
-	$final[$id] = array_merge(($loadProgression == "true" ? getValue($id,$progression) : array()),$value, array("nickname"=>$data[$id]["nickname"], "platform" => $platform, "rankInfo" => $ranks[$value["rank"]]));
+	$final[$id] = array_merge(($loadProgression == "true" ? getValue($id, $progression) : array()) , $value, array(
+		"nickname" => $data[$id]["nickname"],
+		"platform" => $platform,
+		"rankInfo" => $ranks[$value["rank"]]
+	));
 }
-print json_encode(array("players" => $final));
+
+print json_encode(array(
+	"players" => $final
+));
 ?>
