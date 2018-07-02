@@ -52,27 +52,43 @@ if (isset($_GET['region'])) {
 	$region = $_GET['region'];
 }
 
+$notFound = [];
+
 function printName($uid)
 {
-	global $uapi, $data, $id, $platform;
+	global $uapi, $data, $id, $platform, $notFound;
 	$su = $uapi->searchUser("byid", $uid, $platform);
 	if ($su["error"] != true) {
 		$data[$su['uid']] = array(
 			"profile_id" => $su['uid'],
 			"nickname" => $su['nick']
 		);
+	} else {
+		$notFound[$uid] = [
+			"profile_id" => $uid,
+			"error" => [
+				"message" => "User not found!"
+			]
+		];
 	}
 }
 
 function printID($name)
 {
-	global $uapi, $data, $id, $platform;
+	global $uapi, $data, $id, $platform, $notFound;
 	$su = $uapi->searchUser("bynick", $name, $platform);
 	if ($su["error"] != true) {
 		$data[$su['uid']] = array(
 			"profile_id" => $su['uid'],
 			"nickname" => $su['nick']
 		);
+	} else {
+		$notFound[$name] = [
+			"nickname" => $name,
+			"error" => [
+				"message" => "User not found!"
+			]
+		];
 	}
 }
 
@@ -112,7 +128,7 @@ if (empty($data)) {
 	$error = $uapi->getErrorMessage();
 	if ($error === false) {
 		die(json_encode(array(
-			"players" => array()
+			"players" => $notFound
 		)));
 	}
 	else {
@@ -245,6 +261,6 @@ foreach($idresponse["players"] as $value) {
 }
 
 print json_encode(array(
-	"players" => $final
+	"players" => array_merge($final, $notFound)
 ));
 ?>

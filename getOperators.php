@@ -33,19 +33,43 @@ if(isset($_GET['platform'])) {
 	$platform = $_GET['platform'];
 }
 
-function printName($uid) {
-	global $uapi, $data, $id, $platform;
-	$su = $uapi->searchUser("byid",$uid, $platform);
-	if($su["error"] != true){
-		$data[$su['uid']] = array("profile_id" =>$su['uid'], "nickname" => $su['nick']);
+$notFound = [];
+
+function printName($uid)
+{
+	global $uapi, $data, $id, $platform, $notFound;
+	$su = $uapi->searchUser("byid", $uid, $platform);
+	if ($su["error"] != true) {
+		$data[$su['uid']] = array(
+			"profile_id" => $su['uid'],
+			"nickname" => $su['nick']
+		);
+	} else {
+		$notFound[$uid] = [
+			"profile_id" => $uid,
+			"error" => [
+				"message" => "User not found!"
+			]
+		];
 	}
 }
 
-function printID($name) {
-	global $uapi, $data, $id, $platform;
-	$su = $uapi->searchUser("bynick",$name, $platform);
-	if($su["error"] != true){
-		$data[$su['uid']] = array("profile_id"=> $su['uid'] , "nickname" => $su['nick']);
+function printID($name)
+{
+	global $uapi, $data, $id, $platform, $notFound;
+	$su = $uapi->searchUser("bynick", $name, $platform);
+	if ($su["error"] != true) {
+		$data[$su['uid']] = array(
+			"profile_id" => $su['uid'],
+			"nickname" => $su['nick']
+		);
+	} else {
+		$notFound[$name] = [
+			"nickname" => $name,
+			"error" => [
+				"message" => "User not found!"
+			]
+		];
 	}
 }
 
@@ -77,7 +101,7 @@ if(isset($_GET["name"])) {
 if(empty($data)) {
 	$error = $uapi->getErrorMessage();
 	if($error === false) {
-		die(json_encode(array("players" => array())));
+		die(json_encode(array("players" => $notFound)));
 	}else{
 		die(json_encode(array("players" => array(), "error" => $error)));
 	}
@@ -96,8 +120,7 @@ foreach($idresponse as $id=>$value) {
 }
 
 $operatorArray = array();
-$operatorOrg = json_decode('{"zofia":{"name":"Zofia","organisation":"GROM"},"castle":{"name":"Castle","organisation":"FBI SWAT"},"jager":{"name":"Jäger","organisation":"GSG 9"},"vigil":{"name":"Vigil","organisation":"SMB"},"sledge":{"name":"Sledge","organisation":"SAS"},"echo":{"name":"Echo","organisation":"SAT"},"fuze":{"name":"Fuze","organisation":"Spetnaz"},"thermite":{"name":"Thermite","organisation":"FBI SWAT"},"blackbeard":{"name":"Blackbeard","organisation":"Navy Seal"},"buck":{"name":"Buck","organisation":"JTF2"},"frost":{"name":"Frost","organisation":"JTF2"},"caveira":{"name":"Caveira","organisation":"Bope"},"ela":{"name":"Ela","organisation":"GROM"},"capitao":{"name":"Capitão","organisation":"BOPE"},"hibana":{"name":"Hibana","organisation":"SAT"},"thatcher":{"name":"Thatcher","organisation":"SAS"},"kapkan":{"name":"Kapkan","organisation":"Spetnaz"},"twitch":{"name":"Twitch","organisation":"GIGN"},"bandit":{"name":"Bandit","organisation":"GSG 9"},"dokkaebi":{"name":"Dokkaebi","organisation":"SMB"},"smoke":{"name":"Smoke","organisation":"SAS"},"iq":{"name":"IQ","organisation":"GSG 9"},"mute":{"name":"Mute","organisation":"SAS"},"alibi":{"name":"Alibi","organisation":"GIS"},"rook":{"name":"Rook","organisation":"GIGN"},"jackal":{"name":"Jackal","organisation":"GEO"},"lion":{"name":"Lion","organisation":"CBRN"},"glaz":{"name":"Glaz","organisation":"Spetnaz"},"finka":{"name":"Finka","organisation":"CBRN"},"valkyrie":{"name":"Valkyrie","organisation":"Navy Seal"},"ying":{"name":"Ying","organisation":"SDU"},"blitz":{"name":"Blitz","organisation":"GSG 9"},"ash":{"name":"Ash","organisation":"FBI SWAT"},"mira":{"name":"Mira","organisation":"GEO"},"pulse":{"name":"Pulse","organisation":"FBI SWAT"},"doc":{"name":"Doc","organisation":"GIGN"},"montagne":{"name":"Montagne","organisation":"GIGN"},"maestro":{"name":"Maestro","organisation":"GIS"},"lesion":{"name":"Lesion","organisation":"SDU"}}
-', true);
+$operatorOrg = json_decode('{"zofia":{"name":"Zofia","organisation":"GROM"},"castle":{"name":"Castle","organisation":"FBI SWAT"},"jager":{"name":"Jäger","organisation":"GSG 9"},"vigil":{"name":"Vigil","organisation":"SMB"},"sledge":{"name":"Sledge","organisation":"SAS"},"echo":{"name":"Echo","organisation":"SAT"},"fuze":{"name":"Fuze","organisation":"Spetnaz"},"thermite":{"name":"Thermite","organisation":"FBI SWAT"},"blackbeard":{"name":"Blackbeard","organisation":"Navy Seal"},"buck":{"name":"Buck","organisation":"JTF2"},"frost":{"name":"Frost","organisation":"JTF2"},"caveira":{"name":"Caveira","organisation":"Bope"},"ela":{"name":"Ela","organisation":"GROM"},"capitao":{"name":"Capitão","organisation":"BOPE"},"hibana":{"name":"Hibana","organisation":"SAT"},"thatcher":{"name":"Thatcher","organisation":"SAS"},"kapkan":{"name":"Kapkan","organisation":"Spetnaz"},"twitch":{"name":"Twitch","organisation":"GIGN"},"bandit":{"name":"Bandit","organisation":"GSG 9"},"dokkaebi":{"name":"Dokkaebi","organisation":"SMB"},"smoke":{"name":"Smoke","organisation":"SAS"},"iq":{"name":"IQ","organisation":"GSG 9"},"mute":{"name":"Mute","organisation":"SAS"},"alibi":{"name":"Alibi","organisation":"GIS"},"rook":{"name":"Rook","organisation":"GIGN"},"jackal":{"name":"Jackal","organisation":"GEO"},"lion":{"name":"Lion","organisation":"CBRN"},"glaz":{"name":"Glaz","organisation":"Spetnaz"},"finka":{"name":"Finka","organisation":"CBRN"},"valkyrie":{"name":"Valkyrie","organisation":"Navy Seal"},"ying":{"name":"Ying","organisation":"SDU"},"blitz":{"name":"Blitz","organisation":"GSG 9"},"ash":{"name":"Ash","organisation":"FBI SWAT"},"mira":{"name":"Mira","organisation":"GEO"},"pulse":{"name":"Pulse","organisation":"FBI SWAT"},"doc":{"name":"Doc","organisation":"GIGN"},"montagne":{"name":"Montagne","organisation":"GIGN"},"maestro":{"name":"Maestro","organisation":"GIS"},"lesion":{"name":"Lesion","organisation":"SDU"}}', true);
 
 foreach($operators as $operator=>$info) {
 	$operatorArray[$operator] = array();
@@ -112,5 +135,5 @@ foreach($operators as $operator=>$info) {
 	}
 }
 
-print json_encode(array_merge(array("players" => $final),array("operators" => $operatorArray)));
+print json_encode(array_merge(array("players" => array_merge($final,$notFound)),array("operators" => $operatorArray)));
 ?>

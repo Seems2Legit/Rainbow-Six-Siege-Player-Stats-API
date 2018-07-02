@@ -32,21 +32,46 @@ if(isset($_GET['platform'])) {
 	$platform = $_GET['platform'];
 }
 
-function printName($uid) {
-	global $uapi, $data, $id, $platform;
-	$su = $uapi->searchUser("byid",$uid, $platform);
-	if($su["error"] != true){
-		$data[] = array("profile_id" =>$su['uid'], "nickname" => $su['nick']);
+$notFound = [];
+
+function printName($uid)
+{
+	global $uapi, $data, $id, $platform, $notFound;
+	$su = $uapi->searchUser("byid", $uid, $platform);
+	if ($su["error"] != true) {
+		$data[$su['uid']] = array(
+			"profile_id" => $su['uid'],
+			"nickname" => $su['nick']
+		);
+	} else {
+		$notFound[$uid] = [
+			"profile_id" => $uid,
+			"error" => [
+				"message" => "User not found!"
+			]
+		];
 	}
 }
 
-function printID($name) {
-	global $uapi, $data, $id, $platform;
-	$su = $uapi->searchUser("bynick",$name, $platform);
-	if($su["error"] != true){
-		$data[] = array("profile_id"=> $su['uid'] , "nickname" => $su['nick'], "platform" => $platform);
+function printID($name)
+{
+	global $uapi, $data, $id, $platform, $notFound;
+	$su = $uapi->searchUser("bynick", $name, $platform);
+	if ($su["error"] != true) {
+		$data[$su['uid']] = array(
+			"profile_id" => $su['uid'],
+			"nickname" => $su['nick']
+		);
+	} else {
+		$notFound[$name] = [
+			"nickname" => $name,
+			"error" => [
+				"message" => "User not found!"
+			]
+		];
 	}
 }
+
 
 if(isset($_GET["id"])) {
 	$str = $_GET["id"];
@@ -76,11 +101,11 @@ if(isset($_GET["name"])) {
 if(empty($data)) {
 	$error = $uapi->getErrorMessage();
 	if($error === false) {
-		die(json_encode(array("players" => array())));
+		die(json_encode($notFound));
 	}else{
-		die(json_encode(array("players" => array(), "error" => $error)));
+		die(json_encode(array("error" => $error)));
 	}
 }
 
-print json_encode($data);
+print json_encode(array_merge($data, $notFound));
 ?>
