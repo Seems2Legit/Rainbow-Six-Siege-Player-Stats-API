@@ -6,7 +6,7 @@ This API queries the Rainbow Six Siege stats from any given player by name or up
 2. Upload it to your webserver to any location.
 3. In the config.php change the **EMAIL** and the **PASSWORD** fields to an uplay account of your choice.
 4. For your security you will need to set an appcode in config.php file and append GET parameter *appcode* to all request (WARNING: Obviously you should not use spaces).
-5. Give the webserver permissions to edit the *api_ticket* file (usually 777).
+5. Give the webserver permissions to edit the *api_ticket* file, usually 660 or 777 (this one ONLY for tests).
 6. Finished!
 
 ## Usage:
@@ -405,4 +405,4 @@ Response:
 
 Thanks to Seems2Legit and special thanks to K4CZP3R. They made this whole project even possible.
 
-Updated: 27.06.2018 13:20 UTC
+Updated: 20.09.2018 09:00 UTC
