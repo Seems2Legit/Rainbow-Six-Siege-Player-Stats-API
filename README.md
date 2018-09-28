@@ -6,7 +6,7 @@ This API queries the Rainbow Six Siege stats from any given player by name or up
 2. Upload it to your webserver to any location.
 3. In the config.php change the **EMAIL** and the **PASSWORD** fields to an uplay account of your choice.
 4. For your security you will need to set an appcode in config.php file and append GET parameter *appcode* to all request (WARNING: Obviously you should not use spaces).
-5. Give the webserver permissions to edit the *api_ticket* file (usually 777).
+5. Give the webserver permissions to edit the *api_ticket* file, usually 660 or 777 (this one ONLY for tests).
 6. Finished!
 
 ## Usage:
@@ -371,14 +371,14 @@ cd extras
 chmod +x updateOperators.sh
 ./updateOperators.sh
 ```
-When it request operators.json url, put your url or ubi url (https://ubistatic-a.akamaihd.net/0058/prod/assets/data/operators.3a2655c8.json) to start loading data.\
+When it request operators.json url, put your url or ubi url (https://game-rainbow6.ubi.com/assets/data/operators.682af7ce0969c4ec.json) to start loading data.\
 Once finished you can safely delete output.json file and move Operators.php file to parent directory (overwriting old file).\
 Manually editing of Operators.php file is *not* recommended.
 
 ### Error Handling:
 If a function encounter errors like "Too many calls", api add an "error" object in json that contains detailed response from ubisoft servers.
 
-Response:
+Example if there are too many calls:
 ```json
 {
    "players":[
@@ -396,6 +396,18 @@ Response:
 }
 ```
 
+Example if player not found:
+```json
+{
+   "players":[
+
+   ],
+   "error":{
+      "message":"User not found!"
+   }
+}
+```
+
 ## Todo:
 - Add config.php - Done
 - Kills and deaths - Done
@@ -405,4 +417,4 @@ Response:
 
 Thanks to Seems2Legit and special thanks to K4CZP3R. They made this whole project even possible.
 
-Updated: 27.06.2018 13:20 UTC
+Updated: 20.09.2018 10:00 UTC
