@@ -251,6 +251,18 @@ $ranks = json_decode('{
 }', true);
 $final = array();
 
+if (!isset($idresponse)) {
+	die(json_encode(array(
+		"players" => $notFound
+	)));
+}
+
+if (!array_key_exists("players", $idresponse)){
+	die(json_encode(array(
+		"players" => $notFound
+	)));
+}
+
 foreach($idresponse["players"] as $value) {
 	$id = $value["profile_id"];
 	$final[$id] = array_merge(($loadProgression == "true" ? getValue($id, $progression) : array()) , $value, array(
