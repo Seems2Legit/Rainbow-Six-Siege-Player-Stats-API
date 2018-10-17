@@ -160,7 +160,13 @@ $ids = substr($ids, 1);
 $idresponse = json_decode($uapi->getRanking($ids, $season, $region, $platform) , true);
 
 if ($loadProgression == "true") {
-	$progression = json_decode($uapi->getProgression($ids, $platform) , true) ["player_profiles"];
+	$progressionJson = json_decode($uapi->getProgression($ids, $platform) , true);
+	if (!array_key_exists("player_profiles", $progressionJson)){
+		die(json_encode(array(
+			"players" => $notFound
+		)));
+	}
+	$progression = $progressionJson["player_profiles"];
 }
 
 $ranks = json_decode('{
