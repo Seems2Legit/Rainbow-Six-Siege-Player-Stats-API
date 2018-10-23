@@ -127,12 +127,14 @@ class UbiAPI{
 		$result = array();
 
 		foreach($final as $key => $val) {
-			foreach($val["results"] as $user => $value) {
-				if(isset($result[$user])) {
-					$result[$user] = array_merge($result[$user], $value);
-					continue;
+			if (array_key_exists("results", $val)){
+				foreach($val["results"] as $user => $value) {
+					if(isset($result[$user])) {
+						$result[$user] = array_merge($result[$user], $value);
+						continue;
+					}
+					$result[$user] = $value;
 				}
-				$result[$user] = $value;
 			}
 		}
 		return json_encode(array("results" => $result));
