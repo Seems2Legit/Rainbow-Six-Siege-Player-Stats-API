@@ -40,6 +40,7 @@ class UbiAPI{
 	public function searchUser($mode,$content, $platform){
 		$prefixUrl = "https://api-ubiservices.ubi.com/v2/profiles?";
 		if($mode == 1 || $mode == "bynick"){
+			$content = urlencode($content);
 			$request_url = $prefixUrl."nameOnPlatform=".$content."&platformType=$platform";
 		}
 		if($mode == 2 || $mode == "byid"){
