@@ -15,11 +15,11 @@ With this API you can query multiple users at one and it does not matter if you 
 
 Here are some examples:
 ```
-https://gassner.online/api/r6/getUser.php?id=735e4640-32d3-484f-ba56-f80030d35337&appcode=test
-https://gassner.online/api/r6/getUser.php?name=AE_SeemsLegit&appcode=test
-https://gassner.online/api/r6/getUser.php?id=735e4640-32d3-484f-ba56-f80030d35337&name=AE_SeemsLegit&appcode=test
-https://gassner.online/api/r6/getUser.php?name=AE_SeemsLegit&platform=uplay&appcode=test
-https://gassner.online/api/r6/getUser.php?id=735e4640-32d3-484f-ba56-f80030d35337&progression=true&platform=uplay&appcode=test
+https://website.com/api/r6/getUser.php?id=735e4640-32d3-484f-ba56-f80030d35337&appcode=test
+https://website.com/api/r6/getUser.php?name=AE_SeemsLegit&appcode=test
+https://website.com/api/r6/getUser.php?id=735e4640-32d3-484f-ba56-f80030d35337&name=AE_SeemsLegit&appcode=test
+https://website.com/api/r6/getUser.php?name=AE_SeemsLegit&platform=uplay&appcode=test
+https://website.com/api/r6/getUser.php?id=735e4640-32d3-484f-ba56-f80030d35337&progression=true&platform=uplay&appcode=test
 ```
 As you can see it does not matter if you give the api a name or uplay id. It's just important that you never forget to put the **appcode** into you request.
 
@@ -213,9 +213,9 @@ This function only returns the uplayID, the uplay name of any given player(s) (b
 
 Examples:
 ```
-https://gassner.online/api/r6/getSmallUser.php?name=AE_SeemsLegit,AE_BadKey&appcode=test
-https://gassner.online/api/r6/getSmallUser.php?name=AE_SeemsLegit&appcode=test
-https://gassner.online/api/r6/getSmallUser.php?id=735e4640-32d3-484f-ba56-f80030d35337&appcode=test
+https://website.com/api/r6/getSmallUser.php?name=AE_SeemsLegit,AE_BadKey&appcode=test
+https://website.com/api/r6/getSmallUser.php?name=AE_SeemsLegit&appcode=test
+https://website.com/api/r6/getSmallUser.php?id=735e4640-32d3-484f-ba56-f80030d35337&appcode=test
 ```
 Responses:
 ```json
@@ -256,7 +256,7 @@ With this PHP file you can query the stats of any given player by name or uplay 
 
 Examples:
 ```
-https://gassner.online/api/r6/getStats.php?id=a39c7ad5-3282-467c-bc85-f65b0e61cde4&appcode=test
+https://website.com/api/r6/getStats.php?id=a39c7ad5-3282-467c-bc85-f65b0e61cde4&appcode=test
 ```
 
 ### Optional Arguments:
@@ -288,7 +288,7 @@ With this PHP file you can query the stats of all operators by giving player nam
 
 Examples:
 ```
-https://gassner.online/api/r6/getOperators.php?id=a39c7ad5-3282-467c-bc85-f65b0e61cde4&appcode=test
+https://website.com/api/r6/getOperators.php?id=a39c7ad5-3282-467c-bc85-f65b0e61cde4&appcode=test
 ```
 
 ### Optional Arguments:
@@ -417,4 +417,4 @@ Example if player not found:
 
 Thanks to Seems2Legit and special thanks to K4CZP3R. They made this whole project even possible.
 
-Updated: 20.09.2018 10:00 UTC
+Updated: 22.10.2018 10:00 UTC
