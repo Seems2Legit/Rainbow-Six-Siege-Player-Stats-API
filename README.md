@@ -213,42 +213,38 @@ This function only returns the uplayID, the uplay name of any given player(s) (b
 
 Examples:
 ```
-https://website.com/api/r6/getSmallUser.php?name=AE_SeemsLegit,AE_BadKey&appcode=test
-https://website.com/api/r6/getSmallUser.php?name=AE_SeemsLegit&appcode=test
-https://website.com/api/r6/getSmallUser.php?id=735e4640-32d3-484f-ba56-f80030d35337&appcode=test
+https://website.com/api/r6/getSmallUser.php?name=Sidelux00,Sir.Avocado&appcode=test
+https://website.com/api/r6/getSmallUser.php?name=Sidelux00&appcode=test
+https://website.com/api/r6/getSmallUser.php?id=40078dc7-5f24-49a6-ad27-070c9c528f6c&appcode=test
 ```
 Responses:
 ```json
-[
-   {
-      "profile_id":"a39c7ad5-3282-467c-bc85-f65b0e61cde4",
-      "nickname":"AE_SeemsLegit",
-      "platform":"uplay"
+{
+   "40078dc7-5f24-49a6-ad27-070c9c528f6c":{
+       "profile_id":"40078dc7-5f24-49a6-ad27-070c9c528f6c",
+       "nickname":"Sidelux00"
    },
-   {
-      "profile_id":"735e4640-32d3-484f-ba56-f80030d35337",
-      "nickname":"AE_BadKey",
-      "platform":"uplay"
+   "072f0150-f606-4ae7-9041-b17aa5a2b929":{
+       "profile_id":"072f0150-f606-4ae7-9041-b17aa5a2b929",
+       "nickname":"Sir.Avocado"
    }
-]
+}
 ```
 ```json
-[
-   {
-      "profile_id":"735e4640-32d3-484f-ba56-f80030d35337",
-      "nickname":"AE_SeemsLegit",
-      "platform":"uplay"
+{
+   "40078dc7-5f24-49a6-ad27-070c9c528f6c":{
+       "profile_id":"40078dc7-5f24-49a6-ad27-070c9c528f6c",
+       "nickname":"Sidelux00"
    }
-]
+}
 ```
 ```json
-[
-   {
-      "profile_id":"735e4640-32d3-484f-ba56-f80030d35337",
-      "nickname":"AE_BadKey",
-      "platform":"uplay"
+{
+   "072f0150-f606-4ae7-9041-b17aa5a2b929":{
+       "profile_id":"072f0150-f606-4ae7-9041-b17aa5a2b929",
+       "nickname":"Sir.Avocado"
    }
-]
+}
 ```
 
 ### getStats.php:
