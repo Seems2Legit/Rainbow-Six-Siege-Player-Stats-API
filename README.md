@@ -1,4 +1,4 @@
-# Rainbow-Six-Siege-Player-Stats-API
+# Rainbow Six Siege Player Stats API
 This API queries the Rainbow Six Siege stats from any given player by name or uplayID. Multiple and mixed requests at one are also possible.
 
 ## Installation:
