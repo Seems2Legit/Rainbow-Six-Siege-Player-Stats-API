@@ -248,7 +248,7 @@ Responses:
 ```
 
 ### getStats.php:
-With this PHP file you can query the stats of any given player by name or uplay id. Whitch stats are returned is definded in the config.php. All stats that can be returned: https://gist.github.com/LaxisB/3924cfdc35562b719d1c891cdb895366
+With this PHP file you can query the stats of any given player by name or uplay id. Whitch stats are returned is definded in the config.php. All stats that can be returned: https://gist.github.com/sidelux/c2724e64acb7e1b8921c11572800f8d4
 
 Examples:
 ```
