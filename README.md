@@ -357,20 +357,6 @@ Responses (stripped for readability):
 }
 ```
 
-### Extras Folder:
-If there are new available operators, you should launch updateOperators.bat (or .sh, depends on your platform) and it will rewrite Operators.php automatically by executing a java program.\
-So, your machine must have java installed to launch executable, and file must have **execute** permission.
-
-Example for unix:
-```sh
-cd extras
-chmod +x updateOperators.sh
-./updateOperators.sh
-```
-When it request operators.json url, put your url or ubi url (https://game-rainbow6.ubi.com/assets/data/operators.682af7ce0969c4ec.json) to start loading data.\
-Once finished you can safely delete output.json file and move Operators.php file to parent directory (overwriting old file).\
-Manually editing of Operators.php file is *not* recommended.
-
 ### Error Handling:
 If a function encounter errors like "Too many calls", api add an "error" object in json that contains detailed response from ubisoft servers.
 
@@ -413,4 +399,4 @@ Example if player not found:
 
 Thanks to Seems2Legit, _sidelux and special thanks to K4CZP3R. They made this whole project even possible.
 
-Updated: 22.10.2018 10:00 UTC
+Updated: 12.07.2019 10:00 UTC
