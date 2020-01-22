@@ -238,7 +238,7 @@ class UbiAPI{
 	}
 
 	public function login(){
-		$request_url = "https://connect.ubi.com/ubiservices/v2/profiles/sessions";
+		$request_url = "https://public-ubiservices.ubi.com/v3/profiles/sessions";
 		#$request_header_ubiappid="314d4fef-e568-454a-ae06-43e3bece12a6";
 		$request_header_ubiappid="39baebad-39e5-4552-8c25-2c9b919064e2";
 		$request_header_authbasic=$this->b64authcreds;
@@ -254,11 +254,11 @@ class UbiAPI{
 			"Ubi-RequestedPlatformType: uplay",
 			"Authorization: Basic ".$request_header_authbasic,
 			"X-Requested-With: XMLHttpRequest",
-			"Referer: https://connect.ubi.com/Default/Login?appId=".$request_header_ubiappid."&lang=en-US&nextUrl=https%3A%2F%2Fclub.ubisoft.com%2Flogged-in.html%3Flocale%3Den-US",
+			"Referer: https://public-ubiservices.ubi.com/Default/Login?appId=".$request_header_ubiappid."&lang=en-US&nextUrl=https%3A%2F%2Fclub.ubisoft.com%2Flogged-in.html%3Flocale%3Den-US",
 			"Accept-Language: en-US",
 			"Accept-Encoding: deflate, br",
 			"User-Agent: ".$this->http_useragent,
-			"Host: connect.ubi.com",
+			"Host: public-ubiservices.ubi.com",
 			"Content-Lenght: 19",
 			"Cache-Control: no-cache",
 		];

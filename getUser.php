@@ -171,88 +171,100 @@ if ($loadProgression == "true") {
 
 $ranks = json_decode('{
   "0": {
-    "image": "https://i.imgur.com/jNJ1BBl.png",
+    "image": "https://r6tab.com/images/pngranks/0.png?x=3",
     "name": "Unranked"
   },
   "1": {
-    "image": "https://i.imgur.com/deTjm7V.png",
-    "name": "Copper Ⅳ"
+    "image": "",
+    "name": "Copper V"
   },
   "2": {
-    "image": "https://i.imgur.com/zx5KbBO.png",
-    "name": "Copper Ⅲ"
+    "image": "https://r6tab.com/images/pngranks/1.png?x=3",
+    "name": "Copper IV"
   },
   "3": {
-    "image": "https://i.imgur.com/RTCvQDV.png",
-    "name": "Copper Ⅱ"
+    "image": "https://r6tab.com/images/pngranks/2.png?x=3",
+    "name": "Copper III"
   },
   "4": {
-    "image": "https://i.imgur.com/SN55IoP.png",
-    "name": "Copper Ⅰ"
+    "image": "https://r6tab.com/images/pngranks/3.png?x=3",
+    "name": "Copper II"
   },
   "5": {
-    "image": "https://i.imgur.com/DmfZeRP.png",
-    "name": "Bronze Ⅳ"
+    "image": "https://r6tab.com/images/pngranks/4.png?x=3",
+    "name": "Copper I"
   },
   "6": {
-    "image": "https://i.imgur.com/QOuIDW4.png",
-    "name": "Bronze Ⅲ"
+    "image": "",
+    "name": "Bronze V"
   },
   "7": {
-    "image": "https://i.imgur.com/ry1KwLe.png",
-    "name": "Bronze Ⅱ"
+    "image": "https://r6tab.com/images/pngranks/5.png?x=3",
+    "name": "Bronze IV"
   },
   "8": {
-    "image": "https://i.imgur.com/64eQSbG.png",
-    "name": "Bronze Ⅰ"
+    "image": "https://r6tab.com/images/pngranks/6.png?x=3",
+    "name": "Bronze III"
   },
   "9": {
-    "image": "https://i.imgur.com/fOmokW9.png",
-    "name": "Silver Ⅳ"
+    "image": "https://r6tab.com/images/pngranks/7.png?x=3",
+    "name": "Bronze II"
   },
   "10": {
-    "image": "https://i.imgur.com/e84XmHl.png",
-    "name": "Silver Ⅲ"
+    "image": "https://r6tab.com/images/pngranks/8.png?x=3",
+    "name": "Bronze I"
   },
   "11": {
-    "image": "https://i.imgur.com/f68iB99.png",
-    "name": "Silver Ⅱ"
+    "image": "https://r6tab.com/images/pngranks/9.png?x=3",
+    "name": "Silver V"
   },
   "12": {
-    "image": "https://i.imgur.com/iQGr0yz.png",
-    "name": "Silver Ⅰ"
+    "image": "https://r6tab.com/images/pngranks/10.png?x=3",
+    "name": "Silver IV"
   },
   "13": {
-    "image": "https://i.imgur.com/DelhMBP.png",
-    "name": "Gold Ⅳ"
+    "image": "https://r6tab.com/images/pngranks/11.png?x=3",
+    "name": "Silver III"
   },
   "14": {
-    "image": "https://i.imgur.com/5fYa6cM.png",
-    "name": "Gold Ⅲ"
+    "image": "https://r6tab.com/images/pngranks/12.png?x=3",
+    "name": "Silver II"
   },
   "15": {
-    "image": "https://i.imgur.com/7c4dBTz.png",
-    "name": "Gold Ⅱ"
+    "image": "https://r6tab.com/images/pngranks/13.png?x=3",
+    "name": "Silver I"
   },
   "16": {
-    "image": "https://i.imgur.com/cOFgDW5.png",
-    "name": "Gold Ⅰ"
+    "image": "https://r6tab.com/images/pngranks/14.png?x=3",
+    "name": "Gold III"
   },
   "17": {
-    "image": "https://i.imgur.com/to1cRGC.png",
-    "name": "Platinum Ⅲ"
+    "image": "https://r6tab.com/images/pngranks/15.png?x=3",
+    "name": "Gold II"
   },
   "18": {
-    "image": "https://i.imgur.com/vcIEaEz.png",
-    "name": "Platinum Ⅱ"
+    "image": "https://r6tab.com/images/pngranks/16.png?x=3",
+    "name": "Gold I"
   },
   "19": {
-    "image": "https://i.imgur.com/HAU5DLj.png",
-    "name": "Platinum Ⅰ"
+    "image": "https://r6tab.com/images/pngranks/17.png?x=3",
+    "name": "Platinum III"
   },
   "20": {
-    "image": "https://i.imgur.com/Rt6c2om.png",
-    "name": "Diamond Ⅰ"
+    "image": "https://r6tab.com/images/pngranks/18.png?x=3",
+    "name": "Platinum II"
+  },
+  "21": {
+    "image": "https://r6tab.com/images/pngranks/19.png?x=3",
+    "name": "Platinum I"
+  },
+  "22": {
+    "image": "https://r6tab.com/images/pngranks/20.png?x=3",
+    "name": "Diamond"
+  },
+  "23": {
+    "image": "https://r6tab.com/images/pngranks/21.png?x=3",
+    "name": "Champion"
   }
 }', true);
 $final = array();
