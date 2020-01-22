@@ -10,17 +10,17 @@ class UbiAPI{
 		$this->b64authcreds=$this->generateB64Creds($email.":".$password);
 	}
 
-  public function getErrorMessage() {
-    $ticket = json_decode($this->saveTicket(false), true);
-    if(isset($ticket["errorCode"])) {
-      return $ticket;
-    }
-    return false;
-  }
+	public function getErrorMessage() {
+		$ticket = json_decode($this->saveTicket(false), true);
+		if(isset($ticket["errorCode"])) {
+			return $ticket;
+		}
+		return false;
+	}
 
-  public function generateB64Creds($emailandpassword){
-    return base64_encode($emailandpassword);
-  }
+	public function generateB64Creds($emailandpassword){
+		return base64_encode($emailandpassword);
+	}
 
 	function parseHeaders($headers) {
 		$head = array();
@@ -277,22 +277,22 @@ class UbiAPI{
 					 "content"=>"Ticket Updated? (1==true):".$test_fileUpdated);
 	}
 
-  public function uplayticket($check = true) {
-    $ticket = json_decode($this->saveTicket(false), true);
-    if((!isset($ticket["expiration"]) || isset($ticket["error"]) && $ticket["error"] == true || isset($ticket["errorCode"])) && $check) {
-      $this->login();
-      return $this->uplayticket(false);
-    }else if($check) {
-      $time = strtotime($ticket["expiration"]);
-      if($time < time()) {
-        $this->login();
-        return $this->uplayticket(false);
-      }
-    }
-    if(!isset($ticket["ticket"])) {
-      return "";
-    }
-    $ticket = $ticket["ticket"];
+	public function uplayticket($check = true) {
+		$ticket = json_decode($this->saveTicket(false), true);
+		if((!isset($ticket["expiration"]) || isset($ticket["error"]) && $ticket["error"] == true || isset($ticket["errorCode"])) && $check) {
+			$this->login();
+			return $this->uplayticket(false);
+		}else if($check) {
+			$time = strtotime($ticket["expiration"]);
+			if($time < time()) {
+				$this->login();
+				return $this->uplayticket(false);
+			}
+		}
+		if(!isset($ticket["ticket"])) {
+			return "";
+		}
+		$ticket = $ticket["ticket"];
 
 		$prefix = "Ubi_v1 t=";
 		return $prefix.$ticket;

@@ -108,12 +108,12 @@ if(isset($_GET["name"])) {
 }
 
 if(empty($data)) {
-		$error = $uapi->getErrorMessage();
-		if($error === false) {
-			die(json_encode(array("players" => $notFound)));
-		}else{
-			die(json_encode(array("players" => array(), "error" => $error)));
-		}
+	$error = $uapi->getErrorMessage();
+	if($error === false) {
+		die(json_encode(array("players" => $notFound)));
+	}else{
+		die(json_encode(array("players" => array(), "error" => $error)));
+	}
 }
 
 $ids = "";
