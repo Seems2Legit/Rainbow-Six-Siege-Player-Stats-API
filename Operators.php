@@ -1,10 +1,10 @@
 <?php
 
 $arrContextOptions = array(
-    "ssl" => array(
-        "verify_peer" => false,
-        "verify_peer_name" => false,
-    ),
+	"ssl" => array(
+		"verify_peer" => false,
+		"verify_peer_name" => false,
+	),
 );
 
 $ubi_page = file_get_contents("https://game-rainbow6.ubi.com/it-it/home", false, stream_context_create($arrContextOptions));
@@ -19,7 +19,7 @@ foreach ($json as $name => $operator) {
 	$arr_result->$name = new stdClass;
 	$arr_result->$name->images = new stdClass;
 	$arr_result->$name->stats = new stdClass;
-	
+
 	$arr_result->$name->id = $operator["id"];
 	$arr_result->$name->index = $operator["index"];
 	$arr_result->$name->category = $operator["category"];
