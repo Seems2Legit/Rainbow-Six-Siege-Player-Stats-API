@@ -35,18 +35,19 @@ if(isset($_GET['platform'])) {
 
 $notFound = [];
 
-function printName($uid)
+function printID($pid)
 {
 	global $uapi, $data, $id, $platform, $notFound;
-	$su = $uapi->searchUser("byid", $uid, $platform);
+	$su = $uapi->searchUser("byid", $pid, $platform);
 	if ($su["error"] != true) {
-		$data[$su['uid']] = array(
-			"profile_id" => $su['uid'],
+		$data[$su['pid']] = array(
+			"profile_id" => $su['pid'],
+			"user_id" => $su['uid'],
 			"nickname" => $su['nick']
 		);
 	} else {
-		$notFound[$uid] = [
-			"profile_id" => $uid,
+		$notFound[$pid] = [
+			"profile_id" => $pid,
 			"error" => [
 				"message" => "User not found!"
 			]
@@ -54,13 +55,14 @@ function printName($uid)
 	}
 }
 
-function printID($name)
+function printName($name)
 {
 	global $uapi, $data, $id, $platform, $notFound;
 	$su = $uapi->searchUser("bynick", $name, $platform);
 	if ($su["error"] != true) {
-		$data[$su['uid']] = array(
-			"profile_id" => $su['uid'],
+		$data[$su['pid']] = array(
+			"profile_id" => $su['pid'],
+			"user_id" => $su['uid'],
 			"nickname" => $su['nick']
 		);
 	} else {
@@ -82,7 +84,7 @@ if(isset($_GET["id"])) {
 	}
 
 	foreach ($tocheck as $value) {
-		printName($value);
+		printID($value);
 	}
 }
 if(isset($_GET["name"])) {
@@ -94,7 +96,7 @@ if(isset($_GET["name"])) {
 	}
 
 	foreach ($tocheck as $value) {
-		printID($value);
+		printName($value);
 	}
 }
 
@@ -116,7 +118,7 @@ $ids = substr($ids, 1);
 $idresponse = json_decode($uapi->getOperators($ids, $platform), true);
 $final = array();
 foreach($idresponse as $id=>$value) {
-	$final[$id] = array_merge($value, array("profile_id"=>$id, "nickname"=>$data[$id]["nickname"], "platform" => $platform));
+	$final[$id] = array_merge($value, array("profile_id"=>$id, "nickname"=>$data[$id]["nickname"], "user_id"=>$data[$id]["user_id"], "platform" => $platform));
 }
 
 $operatorArray = array();

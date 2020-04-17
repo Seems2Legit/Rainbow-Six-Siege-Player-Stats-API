@@ -44,18 +44,19 @@ if(isset($_GET['stats'])) {
 
 $notFound = [];
 
-function printName($uid)
+function printName($pid)
 {
 	global $uapi, $data, $id, $platform, $notFound;
-	$su = $uapi->searchUser("byid", $uid, $platform);
+	$su = $uapi->searchUser("byid", $pid, $platform);
 	if ($su["error"] != true) {
-		$data[$su['uid']] = array(
-			"profile_id" => $su['uid'],
+		$data[$su['pid']] = array(
+			"profile_id" => $su['pid'],
+			"user_id" => $su['uid'],
 			"nickname" => $su['nick']
 		);
 	} else {
-		$notFound[$uid] = [
-			"profile_id" => $uid,
+		$notFound[$pid] = [
+			"profile_id" => $pid,
 			"error" => [
 				"message" => "User not found!"
 			]
@@ -68,8 +69,9 @@ function printID($name)
 	global $uapi, $data, $id, $platform, $notFound;
 	$su = $uapi->searchUser("bynick", $name, $platform);
 	if ($su["error"] != true) {
-		$data[$su['uid']] = array(
-			"profile_id" => $su['uid'],
+		$data[$su['pid']] = array(
+			"profile_id" => $su['pid'],
+			"user_id" => $su['uid'],
 			"nickname" => $su['nick']
 		);
 	} else {
@@ -126,7 +128,7 @@ $idresponse = json_decode($uapi->getStats($ids, $stats, $platform), true);
 $final = array();
 foreach($idresponse["results"] as $value) {
 	$id = array_search ($value, $idresponse["results"]);
-	$final[$id] = array_merge($value, array("nickname"=>$data[$id]["nickname"], "profile_id" => $id, "platform" => $platform));
+	$final[$id] = array_merge($value, array("nickname"=>$data[$id]["nickname"], "user_id"=>$data[$id]["user_id"], "profile_id" => $id, "platform" => $platform));
 }
 print str_replace(":infinite", "", json_encode(array("players" => array_merge($final,$notFound))));
 ?>

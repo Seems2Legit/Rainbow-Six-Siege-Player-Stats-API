@@ -54,18 +54,19 @@ if (isset($_GET['region'])) {
 
 $notFound = [];
 
-function printName($uid)
+function printName($pid)
 {
 	global $uapi, $data, $id, $platform, $notFound;
-	$su = $uapi->searchUser("byid", $uid, $platform);
+	$su = $uapi->searchUser("byid", $pid, $platform);
 	if ($su["error"] != true) {
-		$data[$su['uid']] = array(
-			"profile_id" => $su['uid'],
+		$data[$su['pid']] = array(
+			"profile_id" => $su['pid'],
+			"user_id" => $su['uid'],
 			"nickname" => $su['nick']
 		);
 	} else {
-		$notFound[$uid] = [
-			"profile_id" => $uid,
+		$notFound[$pid] = [
+			"profile_id" => $pid,
 			"error" => [
 				"message" => "User not found!"
 			]
@@ -78,8 +79,9 @@ function printID($name)
 	global $uapi, $data, $id, $platform, $notFound;
 	$su = $uapi->searchUser("bynick", $name, $platform);
 	if ($su["error"] != true) {
-		$data[$su['uid']] = array(
-			"profile_id" => $su['uid'],
+		$data[$su['pid']] = array(
+			"profile_id" => $su['pid'],
+			"user_id" => $su['uid'],
 			"nickname" => $su['nick']
 		);
 	} else {
@@ -284,7 +286,8 @@ if (!array_key_exists("players", $idresponse)){
 foreach($idresponse["players"] as $value) {
 	$id = $value["profile_id"];
 	$final[$id] = array_merge(($loadProgression == "true" ? getValue($id, $progression) : array()) , $value, array(
-		"nickname" => $data[$id]["nickname"],
+		"nickname" => $data[$id]["nickname"], 
+		"user_id"=>$data[$id]["user_id"],
 		"platform" => $platform,
 		"rankInfo" => $ranks[$value["rank"]]
 	));

@@ -76,7 +76,8 @@ class UbiAPI{
 					 "raw"=>$ubioutput,
 					 "json"=>$jsonoutput,
 					 "nick"=>$jsonoutput['profiles'][0]['nameOnPlatform'],
-					 "uid"=>$jsonoutput['profiles'][0]['profileId']);
+					 "pid"=>$jsonoutput['profiles'][0]['profileId'],
+					 "uid"=>$jsonoutput['profiles'][0]['userId']);
 	}
 
 	public function getOperators($users, $platform) {
