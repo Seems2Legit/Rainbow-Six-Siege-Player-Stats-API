@@ -344,7 +344,8 @@ foreach($idresponse["players"] as $value) {
 	));
 }
 
-echo $data["season"];
+if (array_key_exists("season", $data))
+	echo $data["season"];
 
 print json_encode(array(
 	"players" => array_merge($final, $notFound)

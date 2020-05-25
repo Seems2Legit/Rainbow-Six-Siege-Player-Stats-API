@@ -126,9 +126,9 @@ class UbiAPI{
 	}
 
 	public function getStats($users, $stats, $platform){
-		$array = array_chunk(explode(",",$stats),19,true);
+		$array = array_chunk(explode(",",$stats), 19, true);
 		$final = array();
-
+		
 		foreach($array as $row) {
 			$stats = implode(",",$row);
 			$stats = $this->getStatsRaw($users, $stats, $platform);
@@ -139,7 +139,7 @@ class UbiAPI{
 		$result = array();
 
 		foreach($final as $key => $val) {
-			if (array_key_exists("results", $val)){
+			if ((!is_null($val)) && (array_key_exists("results", $val))){
 				foreach($val["results"] as $user => $value) {
 					if(isset($result[$user])) {
 						$result[$user] = array_merge($result[$user], $value);
