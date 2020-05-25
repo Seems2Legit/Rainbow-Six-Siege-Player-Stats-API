@@ -76,7 +76,8 @@ class UbiAPI{
 					 "raw"=>$ubioutput,
 					 "json"=>$jsonoutput,
 					 "nick"=>$jsonoutput['profiles'][0]['nameOnPlatform'],
-					 "uid"=>$jsonoutput['profiles'][0]['profileId']);
+					 "pid"=>$jsonoutput['profiles'][0]['profileId'],
+					 "uid"=>$jsonoutput['profiles'][0]['userId']);
 	}
 
 	public function getOperators($users, $platform) {
@@ -86,23 +87,33 @@ class UbiAPI{
 		$stats = json_decode($stats, true)["results"];
 		$final = array();
 		$normalStats = array("operatorpvp_roundlost", "operatorpvp_death", "operatorpvp_roundwon", "operatorpvp_kills", "operatorpvp_death", "operatorpvp_timeplayed");
-
+		
 		foreach($stats as $id=>$value) {
 			$final[$id] = array();
 			foreach($operators as $operator=>$info) {
 				$index = $info["index"];
 				$final[$id][$operator] = array();
 				$info = $info["stats"];
+				
 				foreach($normalStats as $stat) {
-					$rstat = $stat . ":" . $index;
+					if($index == "1:8")
+						$rstat = $stat . ":3:8";
+					else
+						$rstat = $stat . ":" . $index;
+
 					if(isset($value[$rstat])) {
 						$final[$id][$operator][$stat] = $value[$rstat];
 					}else{
 						$final[$id][$operator][$stat] = 0;
 					}
 				}
+				
 				foreach ($info as $stat) {
 					$rstat = explode(":", $stat)[0];
+					
+					if(strpos($stat, ":1:8") !== FALSE)
+						$stat = str_replace(":1:8", ":3:8", $stat);
+
 					if(isset($value[$stat])) {
 						$final[$id][$operator][$rstat] = $value[$stat];
 					}else{
