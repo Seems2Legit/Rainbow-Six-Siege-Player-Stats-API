@@ -397,6 +397,6 @@ Example if player not found:
 - User progression stats - Done
 - Detailed operators stats - Done
 
-Thanks to Seems2Legit and special thanks to K4CZP3R. They made this whole project even possible.
+Thanks to Seems2Legit, _sidelux and special thanks to K4CZP3R. They made this whole project even possible.
 
 Updated: 12.07.2019 10:00 UTC

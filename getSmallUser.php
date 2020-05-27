@@ -34,18 +34,19 @@ if(isset($_GET['platform'])) {
 
 $notFound = [];
 
-function printName($uid)
+function printName($pid)
 {
 	global $uapi, $data, $id, $platform, $notFound;
-	$su = $uapi->searchUser("byid", $uid, $platform);
+	$su = $uapi->searchUser("byid", $pid, $platform);
 	if ($su["error"] != true) {
-		$data[$su['uid']] = array(
-			"profile_id" => $su['uid'],
+		$data[$su['pid']] = array(
+			"profile_id" => $su['pid'],
+			"user_id" => $su['uid'],
 			"nickname" => $su['nick']
 		);
 	} else {
-		$notFound[$uid] = [
-			"profile_id" => $uid,
+		$notFound[$pid] = [
+			"profile_id" => $pid,
 			"error" => [
 				"message" => "User not found!"
 			]
@@ -58,8 +59,9 @@ function printID($name)
 	global $uapi, $data, $id, $platform, $notFound;
 	$su = $uapi->searchUser("bynick", $name, $platform);
 	if ($su["error"] != true) {
-		$data[$su['uid']] = array(
-			"profile_id" => $su['uid'],
+		$data[$su['pid']] = array(
+			"profile_id" => $su['pid'],
+			"user_id" => $su['uid'],
 			"nickname" => $su['nick']
 		);
 	} else {
