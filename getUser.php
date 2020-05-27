@@ -283,15 +283,69 @@ if (!array_key_exists("players", $idresponse)){
 	)));
 }
 
+
+function GetSeasonName($seasonId) {
+	$season_name = "";
+	switch($seasonId) {
+		case 6:
+			$season_name = "Health";
+		break;
+		case 7:
+			$season_name = "Blood Orchid";
+		break;
+		case 8:
+			$season_name = "White Noise";
+		break;
+		case 9:
+			$season_name = "Chimera";
+		break;
+		case 10: 
+			$season_name = "Para Bellum";
+		break;
+		case 11:
+			$season_name = "Grim Sky";
+		break;
+		case 12:
+			$season_name = "Wind Bastion";
+		break;
+		case 13:
+			$season_name = "Burnt Horizon";
+		break;
+		case 14:
+			$season_name = "Phantom Sight";
+		break;
+		case 15:
+			$season_name = "Ember Rise";
+		break;
+		case 16: 
+			$season_name = "Shifting Tides";
+		break;
+		case 17:
+			$season_name = "Void Edge";	
+		break;	
+		case 18:
+			$season_name = "Steel Wave";	
+		break;					
+	}
+	
+	return $season_name;
+}
+
+
 foreach($idresponse["players"] as $value) {
 	$id = $value["profile_id"];
 	$final[$id] = array_merge(($loadProgression == "true" ? getValue($id, $progression) : array()) , $value, array(
 		"nickname" => $data[$id]["nickname"], 
-		"user_id"=>$data[$id]["user_id"],
+		"user_id" => $data[$id]["user_id"],
 		"platform" => $platform,
-		"rankInfo" => $ranks[$value["rank"]]
+		"season_name" => GetSeasonName($value["season"]),
+		"rankInfo" => $ranks[$value["rank"]],
+        "maxRankInfo" => $ranks[$value["max_rank"]]
 	));
 }
+
+if (array_key_exists("season", $data))
+	echo $data["season"];
 
 print json_encode(array(
 	"players" => array_merge($final, $notFound)
