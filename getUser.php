@@ -157,7 +157,7 @@ if ($loadProgression == "true") {
 
 $ranks = json_decode('{
   "0": {
-    "image": "https://r6tab.com/images/pngranks/0.png?x=3",
+    "image": "https://tabstats.com/images/r6/ranks/?rank=0&champ=0",
     "name": "Unranked"
   },
   "1": {
@@ -165,19 +165,19 @@ $ranks = json_decode('{
     "name": "Copper V"
   },
   "2": {
-    "image": "https://r6tab.com/images/pngranks/1.png?x=3",
+    "image": "https://tabstats.com/images/r6/ranks/?rank=1&champ=0",
     "name": "Copper IV"
   },
   "3": {
-    "image": "https://r6tab.com/images/pngranks/2.png?x=3",
+    "image": "https://tabstats.com/images/r6/ranks/?rank=2&champ=0",
     "name": "Copper III"
   },
   "4": {
-    "image": "https://r6tab.com/images/pngranks/3.png?x=3",
+    "image": "https://tabstats.com/images/r6/ranks/?rank=3&champ=0",
     "name": "Copper II"
   },
   "5": {
-    "image": "https://r6tab.com/images/pngranks/4.png?x=3",
+    "image": "https://tabstats.com/images/r6/ranks/?rank=4&champ=0",
     "name": "Copper I"
   },
   "6": {
@@ -185,19 +185,19 @@ $ranks = json_decode('{
     "name": "Bronze V"
   },
   "7": {
-    "image": "https://r6tab.com/images/pngranks/5.png?x=3",
+    "image": "https://tabstats.com/images/r6/ranks/?rank=5&champ=0",
     "name": "Bronze IV"
   },
   "8": {
-    "image": "https://r6tab.com/images/pngranks/6.png?x=3",
+    "image": "https://tabstats.com/images/r6/ranks/?rank=6&champ=0",
     "name": "Bronze III"
   },
   "9": {
-    "image": "https://r6tab.com/images/pngranks/7.png?x=3",
+    "image": "https://tabstats.com/images/r6/ranks/?rank=7&champ=0",
     "name": "Bronze II"
   },
   "10": {
-    "image": "https://r6tab.com/images/pngranks/8.png?x=3",
+    "image": "https://tabstats.com/images/r6/ranks/?rank=8&champ=0",
     "name": "Bronze I"
   },
   "11": {
@@ -205,51 +205,51 @@ $ranks = json_decode('{
     "name": "Silver V"
   },
   "12": {
-    "image": "https://r6tab.com/images/pngranks/10.png?x=3",
+    "image": "https://tabstats.com/images/r6/ranks/?rank=9&champ=0",
     "name": "Silver IV"
   },
   "13": {
-    "image": "https://r6tab.com/images/pngranks/11.png?x=3",
+    "image": "https://tabstats.com/images/r6/ranks/?rank=10&champ=0",
     "name": "Silver III"
   },
   "14": {
-    "image": "https://r6tab.com/images/pngranks/12.png?x=3",
+    "image": "https://tabstats.com/images/r6/ranks/?rank=11&champ=0",
     "name": "Silver II"
   },
   "15": {
-    "image": "https://r6tab.com/images/pngranks/13.png?x=3",
+    "image": "https://tabstats.com/images/r6/ranks/?rank=12&champ=0",
     "name": "Silver I"
   },
   "16": {
-    "image": "https://r6tab.com/images/pngranks/14.png?x=3",
+    "image": "https://tabstats.com/images/r6/ranks/?rank=14&champ=0",
     "name": "Gold III"
   },
   "17": {
-    "image": "https://r6tab.com/images/pngranks/15.png?x=3",
+    "image": "https://tabstats.com/images/r6/ranks/?rank=15&champ=0",
     "name": "Gold II"
   },
   "18": {
-    "image": "https://r6tab.com/images/pngranks/16.png?x=3",
+    "image": "https://tabstats.com/images/r6/ranks/?rank=16&champ=0",
     "name": "Gold I"
   },
   "19": {
-    "image": "https://r6tab.com/images/pngranks/17.png?x=3",
+    "image": "https://tabstats.com/images/r6/ranks/?rank=17&champ=0",
     "name": "Platinum III"
   },
   "20": {
-    "image": "https://r6tab.com/images/pngranks/18.png?x=3",
+    "image": "https://tabstats.com/images/r6/ranks/?rank=18&champ=0",
     "name": "Platinum II"
   },
   "21": {
-    "image": "https://r6tab.com/images/pngranks/19.png?x=3",
+    "image": "https://tabstats.com/images/r6/ranks/?rank=19&champ=0",
     "name": "Platinum I"
   },
   "22": {
-    "image": "https://r6tab.com/images/pngranks/20.png?x=3",
+    "image": "https://tabstats.com/images/r6/ranks/?rank=20&champ=0",
     "name": "Diamond"
   },
   "23": {
-    "image": "https://r6tab.com/images/pngranks/21.png?x=3",
+    "image": "https://tabstats.com/images/r6/ranks/?rank=21&champ=0",
     "name": "Champion"
   }
 }', true);
