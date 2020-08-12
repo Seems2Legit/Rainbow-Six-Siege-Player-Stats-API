@@ -147,7 +147,7 @@ $idresponse = json_decode($uapi->getRanking($ids, $season, $region, $platform), 
 
 if ($loadProgression == "true") {
 	$progressionJson = json_decode($uapi->getProgression($ids, $platform), true);
-	if (!array_key_exists("player_profiles", $progressionJson)) {
+	if (is_null($progressionJson) || !array_key_exists("player_profiles", $progressionJson)) {
 		die(json_encode(array(
 			"players" => $notFound
 		)));
