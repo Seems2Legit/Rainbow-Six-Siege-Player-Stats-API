@@ -105,6 +105,10 @@ foreach ($data as $value)
 $ids = substr($ids, 1);
 
 $idresponse = json_decode($uapi->getOperators($ids, $platform), true);
+if (!is_array($idresponse)) {
+	print "{}";
+	exit;
+}
 $final = array();
 foreach($idresponse as $id => $value)
 	$final[$id] = array_merge($value, array("profile_id" => $id, "nickname" => $data[$id]["nickname"], "platform" => $platform));
