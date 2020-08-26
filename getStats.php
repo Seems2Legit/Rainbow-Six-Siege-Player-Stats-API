@@ -23,35 +23,30 @@ if(!isset($_GET["id"]) && !isset($_GET["name"])) {
 
 include("UbiAPI.php");
 
-$uapi = new UbiAPI($config["ubi-email"],$config["ubi-password"]);
+$uapi = new UbiAPI($config["ubi-email"], $config["ubi-password"]);
 
 $data = array();
 $stats = $config["default-stats"];
 $season = -1;
 
-if(isset($_GET['season'])) {
+if(isset($_GET['season']))
 	$season = $_GET['season'];
-}
 
 $platform = $config["default-platform"];
-if(isset($_GET['platform'])) {
+if(isset($_GET['platform']))
 	$platform = $_GET['platform'];
-}
 
-if(isset($_GET['stats'])) {
+if(isset($_GET['stats']))
 	$stats = $_GET['stats'];
-}
 
 $notFound = [];
 
-function printName($pid)
-{
+function printName($pid) {
 	global $uapi, $data, $id, $platform, $notFound;
 	$su = $uapi->searchUser("byid", $pid, $platform);
 	if ($su["error"] != true) {
 		$data[$su['pid']] = array(
 			"profile_id" => $su['pid'],
-			"user_id" => $su['uid'],
 			"nickname" => $su['nick']
 		);
 	} else {
@@ -64,14 +59,12 @@ function printName($pid)
 	}
 }
 
-function printID($name)
-{
+function printID($name) {
 	global $uapi, $data, $id, $platform, $notFound;
 	$su = $uapi->searchUser("bynick", $name, $platform);
 	if ($su["error"] != true) {
 		$data[$su['pid']] = array(
 			"profile_id" => $su['pid'],
-			"user_id" => $su['uid'],
 			"nickname" => $su['nick']
 		);
 	} else {
@@ -84,51 +77,45 @@ function printID($name)
 	}
 }
 
-if(isset($_GET["id"])) {
+if (isset($_GET["id"])) {
 	$str = $_GET["id"];
-	if (strpos($str, ',') !== false) {
+	if (strpos($str, ',') !== false)
 		$tocheck = explode(',', $str);
-	}else{
+	else
 		$tocheck = array($str);
-	}
 
-	foreach ($tocheck as $value) {
+	foreach ($tocheck as $value)
 		printName($value);
-	}
 }
-if(isset($_GET["name"])) {
+if (isset($_GET["name"])) {
 	$str = $_GET["name"];
-	if (strpos($str, ',') !== false) {
+	if (strpos($str, ',') !== false)
 		$tocheck = explode(',', $str);
-	}else{
+	else
 		$tocheck = array($str);
-	}
 
-	foreach ($tocheck as $value) {
+	foreach ($tocheck as $value)
 		printID($value);
-	}
 }
 
-if(empty($data)) {
+if (empty($data)) {
 	$error = $uapi->getErrorMessage();
-	if($error === false) {
+	if($error === false)
 		die(json_encode(array("players" => $notFound)));
-	}else{
+	else
 		die(json_encode(array("players" => array(), "error" => $error)));
-	}
 }
 
 $ids = "";
-foreach ($data as $value) {
+foreach ($data as $value)
 	$ids = $ids . "," . $value["profile_id"];
-}
 $ids = substr($ids, 1);
 
 $idresponse = json_decode($uapi->getStats($ids, $stats, $platform), true);
 $final = array();
-foreach($idresponse["results"] as $value) {
-	$id = array_search ($value, $idresponse["results"]);
-	$final[$id] = array_merge($value, array("nickname"=>$data[$id]["nickname"], "user_id"=>$data[$id]["user_id"], "profile_id" => $id, "platform" => $platform));
+foreach ($idresponse["results"] as $value) {
+	$id = array_search($value, $idresponse["results"]);
+	$final[$id] = array_merge($value, array("nickname" => $data[$id]["nickname"], "profile_id" => $id, "platform" => $platform));
 }
 print str_replace(":infinite", "", json_encode(array("players" => array_merge($final,$notFound))));
 ?>
