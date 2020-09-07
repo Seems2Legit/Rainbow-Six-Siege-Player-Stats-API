@@ -88,8 +88,6 @@ class UbiAPI{
 		$stats = substr($stats, 0, -1);
 		
 		$stats = $this->getStatsRaw($users, $stats, $platform);
-		if ($stats == "")
-			return "";
 		$stats = json_decode($stats, true)["results"];
 		$final = array();
 		foreach($stats as $id => $value) {
