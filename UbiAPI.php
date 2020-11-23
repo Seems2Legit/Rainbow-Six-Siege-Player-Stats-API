@@ -36,7 +36,7 @@ class UbiAPI{
 	}
 
 	public function searchUser($mode,$content, $platform) {
-		$prefixUrl = "https://api-ubiservices.ubi.com/v2/profiles?";
+		$prefixUrl = "https://api-ubiservices.ubi.com/v3/profiles?";
 		if($mode == 1 || $mode == "bynick"){
 			$content = urlencode($content);
 			$request_url = $prefixUrl . "nameOnPlatform=" . $content . "&platformType=" . $platform;

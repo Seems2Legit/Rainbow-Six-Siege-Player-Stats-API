@@ -7,13 +7,10 @@ $arrContextOptions = array(
 	),
 );
 
-$ubi_page = file_get_contents("https://game-rainbow6.ubi.com/it-it/home", false, stream_context_create($arrContextOptions));
-preg_match("/main(.+)js/", $ubi_page, $matches);
-$mainjs = file_get_contents("https://game-rainbow6.ubi.com/assets/scripts/main" . $matches[1] . "js", false, stream_context_create($arrContextOptions));
-preg_match("/assets\/data\/operators(.+?)json/", $mainjs, $matches);
-$operators_string = file_get_contents("https://game-rainbow6.ubi.com/assets/data/operators" . $matches[1] . "json", false, stream_context_create($arrContextOptions));
+$operators_string = file_get_contents("https://api.statsdb.net/r6/config", false, stream_context_create($arrContextOptions));
 
 $json = json_decode($operators_string, true);
+$json = $json["payload"]["operators"];
 $arr_result = new \stdClass;
 foreach ($json as $name => $operator) {
 	$arr_result->$name = new stdClass;

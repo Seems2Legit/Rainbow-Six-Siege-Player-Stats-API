@@ -129,6 +129,6 @@ foreach($operators as $operator => $info) {
 	}
 }
 
-print json_encode(array_merge(array("players" => array_merge($final, $notFound)),array("operators" => $operatorArray)));
+print json_encode(array_merge(array("players" => array_merge($final, $notFound)), array("operators" => $operatorArray)));
 
 ?>
