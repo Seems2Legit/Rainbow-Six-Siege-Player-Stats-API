@@ -7,9 +7,10 @@ $arrContextOptions = array(
 	),
 );
 
-$operators_string = file_get_contents("https://pastebin.com/raw/hA1tnH4G", false, stream_context_create($arrContextOptions));
+$operators_string = file_get_contents("https://api.statsdb.net/r6/config", false, stream_context_create($arrContextOptions));
 
 $json = json_decode($operators_string, true);
+$json = $json["payload"]["operators"];
 $arr_result = new \stdClass;
 foreach ($json as $name => $operator) {
 	$arr_result->$name = new stdClass;
