@@ -20,6 +20,7 @@ foreach ($json as $name => $operator) {
 	$arr_result->$name->id = $operator["id"];
 	$arr_result->$name->index = $operator["index"];
 	$arr_result->$name->category = $operator["category"];
+	$arr_result->$name->ctu = $operator["ctu"];
 	$arr_result->$name->images->badge = $operator["badge"];
 	$arr_result->$name->images->figure = $operator["figure"];
 	$arr_result->$name->images->mask = $operator["mask"];
