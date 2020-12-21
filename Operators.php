@@ -24,10 +24,12 @@ foreach ($json as $name => $operator) {
 	$arr_result->$name->images->badge = $operator["badge"];
 	$arr_result->$name->images->figure = $operator["figure"];
 	$arr_result->$name->images->mask = $operator["mask"];
-	if (array_key_exists("pvp", $operator["uniqueStatistic"]))
-		$arr_result->$name->stats->pvp = $operator["uniqueStatistic"]["pvp"]["statisticId"];
-	if (array_key_exists("pve", $operator["uniqueStatistic"]))
-		$arr_result->$name->stats->pve = $operator["uniqueStatistic"]["pve"]["statisticId"];
+	if (array_key_exists("uniqueStatistic", $operator)) {
+		if (array_key_exists("pvp", $operator["uniqueStatistic"]))
+			$arr_result->$name->stats->pvp = $operator["uniqueStatistic"]["pvp"]["statisticId"];
+		if (array_key_exists("pve", $operator["uniqueStatistic"]))
+			$arr_result->$name->stats->pve = $operator["uniqueStatistic"]["pve"]["statisticId"];
+	}
 }
 
 $operators_string = json_encode($arr_result, JSON_UNESCAPED_SLASHES);
