@@ -155,104 +155,47 @@ if ($loadProgression == "true") {
 	$progression = $progressionJson["player_profiles"];
 }
 
-$ranks = json_decode('{
-  "0": {
-    "image": "https://tabstats.com/images/r6/ranks/?rank=0&champ=0",
-    "name": "Unranked"
-  },
-  "1": {
-    "image": "",
-    "name": "Copper V"
-  },
-  "2": {
-    "image": "https://tabstats.com/images/r6/ranks/?rank=1&champ=0",
-    "name": "Copper IV"
-  },
-  "3": {
-    "image": "https://tabstats.com/images/r6/ranks/?rank=2&champ=0",
-    "name": "Copper III"
-  },
-  "4": {
-    "image": "https://tabstats.com/images/r6/ranks/?rank=3&champ=0",
-    "name": "Copper II"
-  },
-  "5": {
-    "image": "https://tabstats.com/images/r6/ranks/?rank=4&champ=0",
-    "name": "Copper I"
-  },
-  "6": {
-    "image": "",
-    "name": "Bronze V"
-  },
-  "7": {
-    "image": "https://tabstats.com/images/r6/ranks/?rank=5&champ=0",
-    "name": "Bronze IV"
-  },
-  "8": {
-    "image": "https://tabstats.com/images/r6/ranks/?rank=6&champ=0",
-    "name": "Bronze III"
-  },
-  "9": {
-    "image": "https://tabstats.com/images/r6/ranks/?rank=7&champ=0",
-    "name": "Bronze II"
-  },
-  "10": {
-    "image": "https://tabstats.com/images/r6/ranks/?rank=8&champ=0",
-    "name": "Bronze I"
-  },
-  "11": {
-    "image": "https://r6tab.com/images/pngranks/9.png?x=3",
-    "name": "Silver V"
-  },
-  "12": {
-    "image": "https://tabstats.com/images/r6/ranks/?rank=9&champ=0",
-    "name": "Silver IV"
-  },
-  "13": {
-    "image": "https://tabstats.com/images/r6/ranks/?rank=10&champ=0",
-    "name": "Silver III"
-  },
-  "14": {
-    "image": "https://tabstats.com/images/r6/ranks/?rank=11&champ=0",
-    "name": "Silver II"
-  },
-  "15": {
-    "image": "https://tabstats.com/images/r6/ranks/?rank=12&champ=0",
-    "name": "Silver I"
-  },
-  "16": {
-    "image": "https://tabstats.com/images/r6/ranks/?rank=14&champ=0",
-    "name": "Gold III"
-  },
-  "17": {
-    "image": "https://tabstats.com/images/r6/ranks/?rank=15&champ=0",
-    "name": "Gold II"
-  },
-  "18": {
-    "image": "https://tabstats.com/images/r6/ranks/?rank=16&champ=0",
-    "name": "Gold I"
-  },
-  "19": {
-    "image": "https://tabstats.com/images/r6/ranks/?rank=17&champ=0",
-    "name": "Platinum III"
-  },
-  "20": {
-    "image": "https://tabstats.com/images/r6/ranks/?rank=18&champ=0",
-    "name": "Platinum II"
-  },
-  "21": {
-    "image": "https://tabstats.com/images/r6/ranks/?rank=19&champ=0",
-    "name": "Platinum I"
-  },
-  "22": {
-    "image": "https://tabstats.com/images/r6/ranks/?rank=20&champ=0",
-    "name": "Diamond"
-  },
-  "23": {
-    "image": "https://tabstats.com/images/r6/ranks/?rank=21&champ=0",
-    "name": "Champion"
-  }
-}', true);
+function getRankImage($rank, $png) {
+    return 'https://api.statsdb.net/r6/assets/ranks/' . ($png ? 'png/' : '') . $rank;
+}
+
+function getRankName($rank) {
+    switch($rank) {
+        case 0: return "Unranked";
+        case 1: return "Copper V";
+        case 2: return "Copper IV";
+        case 3: return "Copper III";
+        case 4: return "Copper II";
+        case 5: return "Copper I";
+        case 6: return "Bronze V";
+        case 7: return "Bronze IV";
+        case 8: return "Bronze III";
+        case 9: return "Bronze II";
+        case 10: return "Bronze I";
+        case 11: return "Silver V";
+        case 12: return "Silver IV";
+        case 13: return "Silver III";
+        case 14: return "Silver II";
+        case 15: return "Silver I";
+        case 16: return "Gold III";
+        case 17: return "Gold II";
+        case 18: return "Gold I";
+        case 19: return "Platinum III";
+        case 20: return "Platinum II";
+        case 21: return "Platinum I";
+        case 22: return "Diamond";
+        case 23: return "Champion";
+        default: return null;
+    }
+}
+
+function getRankArray($rank, $png) {
+    return [
+        'image' => getRankImage($rank, $png),
+        'name' => getRankName($rank)
+    ];
+}
+
 $final = array();
 
 if (!isset($idresponse)) {
@@ -267,8 +210,7 @@ if (!array_key_exists("players", $idresponse)) {
 	)));
 }
 
-
-function GetSeasonName($seasonId) {
+function getSeasonName($seasonId) {
 	$season_name = "";
 	switch($seasonId) {
 		case 6:
@@ -309,7 +251,13 @@ function GetSeasonName($seasonId) {
 		break;	
 		case 18:
 			$season_name = "Steel Wave";	
-		break;					
+		break;
+        case 19:
+            $season_name = "Shadow Legacy";
+        break;
+        case 20:
+            $season_name = "Neon Dawn";
+        break;					
 	}
 	
 	return $season_name;
@@ -322,9 +270,9 @@ foreach($idresponse["players"] as $value) {
 		"nickname" => $data[$id]["nickname"], 
 		"user_id" => $data[$id]["user_id"],
 		"platform" => $platform,
-		"season_name" => GetSeasonName($value["season"]),
-		"rankInfo" => $ranks[$value["rank"]],
-        "maxRankInfo" => $ranks[$value["max_rank"]]
+		"season_name" => getSeasonName($value["season"]),
+		"rankInfo" => getRankArray($value["rank"], $config['rank-images-png']),
+        "maxRankInfo" => getRankArray($value["max_rank"], $config['rank-images-png'])
 	));
 }
 
@@ -334,4 +282,3 @@ if (array_key_exists("season", $data))
 print json_encode(array(
 	"players" => array_merge($final, $notFound)
 ));
-?>

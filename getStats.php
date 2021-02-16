@@ -118,4 +118,3 @@ foreach ($idresponse["results"] as $value) {
 	$final[$id] = array_merge($value, array("nickname" => $data[$id]["nickname"], "profile_id" => $id, "platform" => $platform));
 }
 print str_replace(":infinite", "", json_encode(array("players" => array_merge($final,$notFound))));
-?>
