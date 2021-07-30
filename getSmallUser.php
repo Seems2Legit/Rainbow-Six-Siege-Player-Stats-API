@@ -69,6 +69,7 @@ function printID($name) {
 	}
 }
 
+header("Content-Type: application/json");
 
 if (isset($_GET["id"])) {
 	$str = $_GET["id"];
