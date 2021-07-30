@@ -252,12 +252,18 @@ function getSeasonName($seasonId) {
 		case 18:
 			$season_name = "Steel Wave";	
 		break;
-        case 19:
-            $season_name = "Shadow Legacy";
-        break;
-        case 20:
-            $season_name = "Neon Dawn";
-        break;					
+		case 19:
+			$season_name = "Shadow Legacy";
+		break;
+		case 20:
+			$season_name = "Neon Dawn";
+		break;	
+		case 21:
+			$season_name = "Chrimson Heist";
+		break;
+		case 22:
+			$season_name = "North Star";
+		break;
 	}
 	
 	return $season_name;
