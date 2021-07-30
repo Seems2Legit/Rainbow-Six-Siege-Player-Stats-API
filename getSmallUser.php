@@ -100,5 +100,3 @@ if (empty($data)) {
 }
 
 print json_encode(array_merge($data, $notFound));
-
-?>
