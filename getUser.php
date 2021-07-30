@@ -259,7 +259,7 @@ function getSeasonName($seasonId) {
 			$season_name = "Neon Dawn";
 		break;	
 		case 21:
-			$season_name = "Chrimson Heist";
+			$season_name = "Crimson Heist";
 		break;
 		case 22:
 			$season_name = "North Star";
