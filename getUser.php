@@ -282,6 +282,8 @@ foreach($idresponse["players"] as $value) {
 	));
 }
 
+header("Content-Type: application/json");
+
 if (array_key_exists("season", $data))
 	echo $data["season"];
 
