@@ -115,10 +115,8 @@ foreach($idresponse as $id => $value)
 
 foreach($operators as $operator => $info) {
 	$operatorArray[$operator] = array();
-	if (!array_key_exists("name", $info)) {
-		error_log("Operators info missing");
+	if (!array_key_exists("name", $info))
 		continue;
-	}
 	$operatorArray[$operator]["name"] = ucfirst(strtolower($info["name"]));
 	$operatorArray[$operator]["organisation"] = $info["ctu"];
 	$operatorArray[$operator]["images"] = $info["images"];
