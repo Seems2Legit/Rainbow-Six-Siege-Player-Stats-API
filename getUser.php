@@ -184,8 +184,8 @@ function getRankName($rank) {
         case 20: return "Platinum II";
         case 21: return "Platinum I";
         case 22: return "Diamond III";
-		case 23: return "Diamond II";
-		case 24: return "Diamond I";
+        case 23: return "Diamond II";
+        case 24: return "Diamond I";
         case 25: return "Champion";
         default: return null;
     }
