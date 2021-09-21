@@ -264,6 +264,9 @@ function getSeasonName($seasonId) {
 		case 22:
 			$season_name = "North Star";
 		break;
+		case 23:
+			$season_name = "Crystal Guard";
+		break;
 	}
 	
 	return $season_name;
