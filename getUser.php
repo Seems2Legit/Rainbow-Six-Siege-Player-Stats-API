@@ -269,6 +269,15 @@ function getSeasonName($seasonId) {
 		case 23:
 			$season_name = "Crystal Guard";
 		break;
+		case 24:
+			$season_name = "High Calibre";
+		break;
+		case 25:
+			$season_name = "Demon Veil";
+		break;
+		case 25:
+			$season_name = "Operation Vector Glare";
+		break;
 	}
 	
 	return $season_name;
