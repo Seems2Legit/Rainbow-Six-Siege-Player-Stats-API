@@ -276,7 +276,7 @@ function getSeasonName($seasonId) {
 			$season_name = "Demon Veil";
 		break;
 		case 25:
-			$season_name = "Operation Vector Glare";
+			$season_name = "Vector Glare";
 		break;
 	}
 	
