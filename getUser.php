@@ -278,6 +278,9 @@ function getSeasonName($seasonId) {
 		case 26:
 			$season_name = "Vector Glare";
 		break;
+		case 27:
+			$season_name = "Brutal Swarm";
+		break;
 	}
 	
 	return $season_name;
